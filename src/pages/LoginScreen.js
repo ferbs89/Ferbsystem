@@ -8,6 +8,10 @@ export default function LoginScreen({ navigation }) {
         navigation.navigate('HomeScreen');
     }
 
+    function register() {
+        navigation.navigate('RegisterScreen');
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.loginContainer}>
@@ -35,7 +39,7 @@ export default function LoginScreen({ navigation }) {
                     <Text style={styles.loginButtonText}>Entrar</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.createButton} onPress={() => { this.props.navigation.navigate("Register") }}>
+                <TouchableOpacity style={styles.createButton} onPress={register}>
                     <Text style={styles.createText}>Criar uma conta</Text>
                 </TouchableOpacity>
             </View>
