@@ -1,10 +1,24 @@
-import React from 'react';
-import { StyleSheet, View, Image, TextInput, Text, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Image, TextInput, Text, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
 
 import logo from '../assets/logo-header.png';
 
 export default function LoginScreen({ navigation }) {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
+
     function login() {
+        if (!email) {
+            Alert.alert(null, "Digite o e-mail.");
+            return;
+        }
+
+        if (!password) {
+            Alert.alert(null, "Digite a senha.");
+            return;
+        }
+
         navigation.navigate('HomeScreen');
     }
 
@@ -19,32 +33,49 @@ export default function LoginScreen({ navigation }) {
                     <Image source={logo} />
                 </View>
 
-                <TextInput
-                    style={styles.textInput}
-                    autoCapitalize="none"
-                    underlineColorAndroid="rgba(0, 0, 0, 0)"
-                    placeholder="E-mail"
-                    keyboardType="email-address"
-                />
+                {
+                    loading ?
+                        <ActivityIndicator color="#17496E" size="large" style={{ padding: 10 }} />
+                        :
+                        <>
+                            <TextInput
+                                style={styles.textInput}
+                                autoCapitalize="none"
+                                underlineColorAndroid="rgba(0, 0, 0, 0)"
+                                placeholder="E-mail"
+                                keyboardType="email-address"
+                                value={email}
+                                onChangeText={setEmail}
+                            />
 
-                <TextInput
-                    style={styles.textInput}
-                    autoCapitalize="none"
-                    underlineColorAndroid="rgba(0, 0, 0, 0)"
-                    placeholder="Senha"
-                    secureTextEntry={true}
-                />
+                            <TextInput
+                                style={styles.textInput}
+                                autoCapitalize="none"
+                                underlineColorAndroid="rgba(0, 0, 0, 0)"
+                                placeholder="Senha"
+                                secureTextEntry={true}
+                                value={password}
+                                onChangeText={setPassword}
+                            />
 
-                <TouchableOpacity style={styles.loginButton} onPress={login}>
-                    <Text style={styles.loginButtonText}>Entrar</Text>
-                </TouchableOpacity>
+                            <TouchableOpacity style={styles.loginButton} onPress={login}>
+                                <Text style={styles.loginButtonText}>Entrar</Text>
+                            </TouchableOpacity>
 
-                <TouchableOpacity style={styles.createButton} onPress={register}>
-                    <Text style={styles.createText}>Criar uma conta</Text>
-                </TouchableOpacity>
+                            <TouchableOpacity style={styles.createButton} onPress={register}>
+                                <Text style={styles.createText}>Criar uma conta</Text>
+                            </TouchableOpacity>
+                        </>
+                }
             </View>
         </View>
     );
+}
+
+export function LoginNavigationOptions({ navigation }) {
+    return {
+        header: null
+    };
 }
 
 const styles = StyleSheet.create({
