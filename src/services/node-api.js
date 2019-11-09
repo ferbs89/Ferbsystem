@@ -1,10 +1,11 @@
 import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import NavigationService from '../config/NavigationService';
+
+import { Logout } from '../pages/logout';
+
 import axios from 'axios';
 
 const api = axios.create({
-	// baseURL: 'http://192.168.0.106:3000/api'
 	baseURL: 'https://ferbs89.herokuapp.com/api'
 });
 
@@ -25,11 +26,8 @@ api.interceptors.response.use(
 	async (error) => {
 		if (error.response) {
 			if (error.response.status == 401) {
-				await AsyncStorage.removeItem('user');
-				await AsyncStorage.removeItem('token');
-
-				NavigationService.navigate('LoginScreen');
-
+				Alert.alert(null, 'Sua sessão expirou.');
+				Logout();
 			} else {
 				Alert.alert(null, error.response.data.error);
 			}

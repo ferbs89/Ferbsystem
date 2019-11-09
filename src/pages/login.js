@@ -6,18 +6,13 @@ import api from '../services/node-api';
 import logo from '../assets/logo.png';
 
 export default function LoginScreen({ navigation }) {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('ferbs89@gmail.com');
+    const [password, setPassword] = useState('fer');
     const [loading, setLoading] = useState(false);
 
     async function login() {
-        if (!email) {
-            Alert.alert(null, 'Digite o e-mail.');
-            return;
-        }
-
-        if (!password) {
-            Alert.alert(null, 'Digite a senha.');
+        if (!email || !password) {
+            Alert.alert(null, 'Preencha corretamente os campos de e-mail e senha.');
             return;
         }
 
@@ -34,15 +29,10 @@ export default function LoginScreen({ navigation }) {
             AsyncStorage.setItem('token', token);
 
             navigation.navigate('HomeScreen');
-            setLoading(false);
 
         }).catch(error => {
             setLoading(false);
         });
-    }
-
-    function register() {
-        navigation.navigate('RegisterScreen');
     }
 
     return (
