@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Image, TextInput, Text, TouchableOpacity } from 'react-native';
 
-import logo from '../assets/logo-header.png';
+import logo from '../assets/logo.png';
 
 export default function RegisterScreen({ navigation }) {
     return (
@@ -13,7 +13,6 @@ export default function RegisterScreen({ navigation }) {
 
                 <TextInput
                     style={styles.textInput}
-                    autoCapitalize="none"
                     underlineColorAndroid="rgba(0, 0, 0, 0)"
                     placeholder="Nome"
                 />
@@ -46,38 +45,32 @@ export default function RegisterScreen({ navigation }) {
     );
 }
 
-export function RegisterNavigationOptions({ navigation }) {
-    return {
-        header: null
-    };
-}
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
-        backgroundColor: "#17496E",
+        justifyContent: 'center',
+        backgroundColor: '#17496E',
         padding: 10,
     },
 
     loginContainer: {
-        backgroundColor: "#FFF",
+        backgroundColor: '#FFF',
         borderRadius: 5,
         padding: 10,
     },
 
     imageContainer: {
         padding: 10,
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
     textInput: {
-        alignSelf: "stretch",
+        alignSelf: 'stretch',
         paddingVertical: 0,
         paddingHorizontal: 10,
         borderWidth: 1,
-        borderColor: "#DDD",
+        borderColor: '#DDD',
         height: 40,
         borderRadius: 3,
         marginBottom: 10,
@@ -86,29 +79,29 @@ const styles = StyleSheet.create({
     loginButton: {
         height: 42,
         borderRadius: 5,
-        backgroundColor: "#17496E",
-        justifyContent: "center",
-        alignItems: "center",
+        backgroundColor: '#17496E',
+        justifyContent: 'center',
+        alignItems: 'center',
         marginBottom: 10,
     },
 
     loginButtonText: {
-        color: "#FFF",
-        fontWeight: "bold",
+        color: '#FFF',
+        fontWeight: 'bold',
     },
 
     createButton: {
         height: 42,
         borderRadius: 5,
-        backgroundColor: "#FFFFFF",
+        backgroundColor: '#FFFFFF',
         borderWidth: 1,
-        borderColor: "#17496E",
-        justifyContent: "center",
-        alignItems: "center",
+        borderColor: '#17496E',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
     createText: {
-        color: "#17496E",
-        fontWeight: "bold",
+        color: '#17496E',
+        fontWeight: 'bold',
     }
 });

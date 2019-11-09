@@ -4,22 +4,26 @@ import { Image } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import LoginScreen, { LoginNavigationOptions } from './pages/LoginScreen';
-import RegisterScreen, { RegisterNavigationOptions } from './pages/RegisterScreen';
-import HomeScreen from './pages/HomeScreen';
+import LoginScreen from './pages/login';
+import RegisterScreen from './pages/register';
+import HomeScreen from './pages/home';
 
-import logo from './assets/logo-header.png';
+import logo from './assets/logo.png';
 
 const Routes = createAppContainer(
     createStackNavigator({
         LoginScreen: {
             screen: LoginScreen,
-            navigationOptions: LoginNavigationOptions,
+            navigationOptions: {
+                header: null
+            },
         },
 
         RegisterScreen: {
             screen: RegisterScreen,
-            navigationOptions: RegisterNavigationOptions,
+            navigationOptions: {
+                header: null
+            },
         },
 
         HomeScreen,

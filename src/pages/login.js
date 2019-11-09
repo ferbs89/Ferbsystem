@@ -1,25 +1,44 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Image, TextInput, Text, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
-import logo from '../assets/logo-header.png';
+import api from '../services/node-api';
+import logo from '../assets/logo.png';
 
 export default function LoginScreen({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
-    function login() {
+    async function login() {
         if (!email) {
-            Alert.alert(null, "Digite o e-mail.");
+            Alert.alert(null, 'Digite o e-mail.');
             return;
         }
 
         if (!password) {
-            Alert.alert(null, "Digite a senha.");
+            Alert.alert(null, 'Digite a senha.');
             return;
         }
 
-        navigation.navigate('HomeScreen');
+        setLoading(true);
+
+        await api.post('/login', {
+            email,
+            password
+
+        }).then(response => {
+            const { user, token } = response.data;
+
+            AsyncStorage.setItem('user', JSON.stringify(user));
+            AsyncStorage.setItem('token', token);
+
+            navigation.navigate('HomeScreen');
+            setLoading(false);
+
+        }).catch(error => {
+            setLoading(false);
+        });
     }
 
     function register() {
@@ -62,48 +81,42 @@ export default function LoginScreen({ navigation }) {
                                 <Text style={styles.loginButtonText}>Entrar</Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity style={styles.createButton} onPress={register}>
+                            <TouchableOpacity style={styles.createButton} onPress={() => { navigation.navigate('RegisterScreen') }}>
                                 <Text style={styles.createText}>Criar uma conta</Text>
                             </TouchableOpacity>
                         </>
                 }
             </View>
-        </View>
+        </View >
     );
-}
-
-export function LoginNavigationOptions({ navigation }) {
-    return {
-        header: null
-    };
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
-        backgroundColor: "#17496E",
+        justifyContent: 'center',
+        backgroundColor: '#17496E',
         padding: 10,
     },
 
     loginContainer: {
-        backgroundColor: "#FFF",
+        backgroundColor: '#FFF',
         borderRadius: 5,
         padding: 10,
     },
 
     imageContainer: {
         padding: 10,
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
     textInput: {
-        alignSelf: "stretch",
+        alignSelf: 'stretch',
         paddingVertical: 0,
         paddingHorizontal: 10,
         borderWidth: 1,
-        borderColor: "#DDD",
+        borderColor: '#DDD',
         height: 40,
         borderRadius: 3,
         marginBottom: 10,
@@ -112,29 +125,29 @@ const styles = StyleSheet.create({
     loginButton: {
         height: 42,
         borderRadius: 5,
-        backgroundColor: "#17496E",
-        justifyContent: "center",
-        alignItems: "center",
+        backgroundColor: '#17496E',
+        justifyContent: 'center',
+        alignItems: 'center',
         marginBottom: 10,
     },
 
     loginButtonText: {
-        color: "#FFF",
-        fontWeight: "bold",
+        color: '#FFF',
+        fontWeight: 'bold',
     },
 
     createButton: {
         height: 42,
         borderRadius: 5,
-        backgroundColor: "#FFFFFF",
+        backgroundColor: '#FFFFFF',
         borderWidth: 1,
-        borderColor: "#17496E",
-        justifyContent: "center",
-        alignItems: "center",
+        borderColor: '#17496E',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
     createText: {
-        color: "#17496E",
-        fontWeight: "bold",
+        color: '#17496E',
+        fontWeight: 'bold',
     }
 });
