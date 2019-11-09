@@ -1,25 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Image, ActivityIndicator } from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet, View, Text, Image, ActivityIndicator, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import logo from './assets/logo.png';
 
 export default function SessionScreen({ navigation }) {
-    const [user, setUser] = useState([]);
-    const [token, setToken] = useState('');
-
     useEffect(() => {
         fetchData();
-
-        if (user && token)
-            navigation.navigate('HomeScreen');
-        else
-            navigation.navigate('LoginScreen');
     }, []);
 
     async function fetchData() {
-        await AsyncStorage.getItem('user').then(user => setUser(JSON.parse(user)));
-        await AsyncStorage.getItem('token').then(setToken);
+        const user = await AsyncStorage.getItem('user');
+        const token = await AsyncStorage.getItem('token');
+
+        navigation.navigate((user && token) ? ('HomeScreen') : ('LoginScreen'));
     }
 
     return (

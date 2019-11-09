@@ -1,8 +1,7 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
 
-import NavigationService from "./config/NavigationService";
-
+import NavigationService from './config/NavigationService';
 import Routes from './routes';
 
 export default function App() {

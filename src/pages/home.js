@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -6,18 +6,6 @@ import api from '../services/node-api';
 import { Logout } from './logout'
 
 export default function HomeScreen({ navigation }) {
-    const [user, setUser] = useState([]);
-    const [token, setToken] = useState('');
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    async function fetchData() {
-        await AsyncStorage.getItem('user').then(user => setUser(JSON.parse(user)));
-        await AsyncStorage.getItem('token').then(setToken);
-    }
-
     async function listUsers() {
         await api.get("/users").then(response => {
             const { users } = response.data;
@@ -31,7 +19,7 @@ export default function HomeScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} onPress={listUsers}>
-                <Text style={styles.buttonText}>Listar usuários</Text>
+                <Text style={styles.buttonText}>Testar API</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.button} onPress={Logout}>

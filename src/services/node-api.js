@@ -1,9 +1,8 @@
 import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import axios from 'axios';
 
 import { Logout } from '../pages/logout';
-
-import axios from 'axios';
 
 const api = axios.create({
 	baseURL: 'https://ferbs89.herokuapp.com/api'
@@ -28,6 +27,7 @@ api.interceptors.response.use(
 			if (error.response.status == 401) {
 				Alert.alert(null, 'Sua sessão expirou.');
 				Logout();
+
 			} else {
 				Alert.alert(null, error.response.data.error);
 			}
