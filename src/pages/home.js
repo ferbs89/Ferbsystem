@@ -12,12 +12,16 @@ export default function HomeScreen({ navigation }) {
             Alert.alert(null, 'OK');
 
         }).catch(error => {
-
+            console.log(error);
         });
     }
 
     return (
         <View style={styles.container}>
+            <TouchableOpacity style={styles.button} onPress={navigation.openDrawer}>
+                <Text style={styles.buttonText}>openDrawer</Text>
+            </TouchableOpacity>
+
             <TouchableOpacity style={styles.button} onPress={listUsers}>
                 <Text style={styles.buttonText}>Testar API</Text>
             </TouchableOpacity>

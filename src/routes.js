@@ -2,6 +2,7 @@ import React from 'react';
 import { Image } from 'react-native';
 
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import SessionScreen from "./session";
@@ -20,8 +21,21 @@ const AuthStack = createStackNavigator({
     }
 });
 
-const AppStack = createStackNavigator({
-    HomeScreen,
+const AppStack = createDrawerNavigator({
+    HomeScreen: {
+        screen: createStackNavigator({
+            HomeScreen
+        }, {
+            headerLayoutPreset: 'center',
+            defaultNavigationOptions: {
+                headerTitle: <Image source={logo} />,
+                headerTintColor: '#17496E'
+            }
+        }),
+        navigationOptions: {
+            drawerLabel: "Home",
+        }
+    },
 }, {
     headerLayoutPreset: 'center',
     defaultNavigationOptions: {
@@ -29,6 +43,16 @@ const AppStack = createStackNavigator({
         headerTintColor: '#17496E'
     }
 });
+
+// const AppStack = createStackNavigator({
+//     HomeScreen,
+// }, {
+//     headerLayoutPreset: 'center',
+//     defaultNavigationOptions: {
+//         headerTitle: <Image source={logo} />,
+//         headerTintColor: '#17496E'
+//     }
+// });
 
 const Routes = createAppContainer(
     createSwitchNavigator(
