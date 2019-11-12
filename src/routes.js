@@ -64,7 +64,7 @@ const AppStack = createDrawerNavigator({
         screen: HomeStack,
         navigationOptions: {
             drawerLabel: 'Home',
-            drawerIcon: <Icon name="home" size={26} />
+            drawerIcon: ({ tintColor }) => (<Icon name="home" size={26} color={tintColor} />)
         }
     },
 
@@ -72,7 +72,7 @@ const AppStack = createDrawerNavigator({
         screen: FavoriteStack,
         navigationOptions: {
             drawerLabel: 'Favoritos',
-            drawerIcon: ({ tintColor }) => (<Icon name="favorite" size={26} />)
+            drawerIcon: ({ tintColor }) => (<Icon name="favorite" size={26} color={tintColor} />)
         }
     },
 }, {
