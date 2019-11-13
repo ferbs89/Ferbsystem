@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, Alert } from 'react-native';
 
 import api from '../services/node-api';
-import { Logout } from './logout'
+import { Logout } from '../helpers/logout'
 
 export default function HomeScreen({ navigation }) {
     async function listUsers() {

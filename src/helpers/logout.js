@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
-import NavigationService from '../config/NavigationService';
+import NavigationService from '../navigation/NavigationService';
 
 export async function Logout() {
     await AsyncStorage.removeItem('user');

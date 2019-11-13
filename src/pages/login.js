@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Image, TextInput, Text, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Image, TextInput, Text, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import api from '../services/node-api';
-import logo from '../assets/logo.png';
+import Logo from '../assets/logo.png';
 
 export default function LoginScreen({ navigation }) {
     const [email, setEmail] = useState('ferbs89@gmail.com');
@@ -38,8 +38,8 @@ export default function LoginScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.loginContainer}>
-                <View style={styles.imageContainer}>
-                    <Image source={logo} />
+                <View style={styles.logoContainer}>
+                    <Image source={Logo} />
                 </View>
 
                 {
@@ -67,12 +67,12 @@ export default function LoginScreen({ navigation }) {
                                 onChangeText={setPassword}
                             />
 
-                            <TouchableOpacity style={styles.loginButton} onPress={login}>
-                                <Text style={styles.loginButtonText}>Entrar</Text>
+                            <TouchableOpacity style={styles.button} onPress={login}>
+                                <Text style={styles.buttonText}>Entrar</Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity style={styles.createButton} onPress={() => { navigation.navigate('RegisterScreen') }}>
-                                <Text style={styles.createText}>Criar uma conta</Text>
+                            <TouchableOpacity style={styles.buttonOutline} onPress={() => { navigation.navigate('RegisterScreen') }}>
+                                <Text style={styles.buttonOutlineText}>Criar uma conta</Text>
                             </TouchableOpacity>
                         </>
                 }
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
 
-    imageContainer: {
+    logoContainer: {
         padding: 10,
         justifyContent: 'center',
         alignItems: 'center',
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
 
-    loginButton: {
+    button: {
         height: 42,
         borderRadius: 5,
         backgroundColor: '#17496E',
@@ -121,12 +121,12 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
 
-    loginButtonText: {
+    buttonText: {
         color: '#FFF',
         fontWeight: 'bold',
     },
 
-    createButton: {
+    buttonOutline: {
         height: 42,
         borderRadius: 5,
         backgroundColor: '#FFFFFF',
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 
-    createText: {
+    buttonOutlineText: {
         color: '#17496E',
         fontWeight: 'bold',
     }

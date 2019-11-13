@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet, View, Text, Image, ActivityIndicator, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import logo from './assets/logo.png';
+import Logo from './assets/logo.png';
 
 export default function SessionScreen({ navigation }) {
     useEffect(() => {
@@ -20,7 +20,7 @@ export default function SessionScreen({ navigation }) {
         <View style={styles.container}>
             <View style={styles.loadingContainer}>
                 <View style={styles.imageContainer}>
-                    <Image source={logo} />
+                    <Image source={Logo} />
                 </View>
 
                 <ActivityIndicator color="#17496E" size="large" />

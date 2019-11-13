@@ -1,14 +1,14 @@
 import React from 'react';
 import { StyleSheet, View, Image, TextInput, Text, TouchableOpacity } from 'react-native';
 
-import logo from '../assets/logo.png';
+import Logo from '../assets/logo.png';
 
 export default function RegisterScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.loginContainer}>
                 <View style={styles.imageContainer}>
-                    <Image source={logo} />
+                    <Image source={Logo} />
                 </View>
 
                 <TextInput

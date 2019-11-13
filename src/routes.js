@@ -1,11 +1,14 @@
 import React from 'react';
-import { Image, TouchableOpacity } from 'react-native';
+import { Image } from 'react-native';
 
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import DrawerButton from './components/DrawerButton';
+import Logo from './assets/logo.png';
 
 import SessionScreen from "./session";
 import LoginScreen from './pages/login';
@@ -14,22 +17,12 @@ import RegisterScreen from './pages/register';
 import HomeScreen from './pages/home';
 import FavoriteScreen from './pages/favorites';
 
-import logo from './assets/logo.png';
-
-const Header = {
+const HeaderConfig = {
     headerLayoutPreset: 'center',
     defaultNavigationOptions: {
-        headerTitle: <Image source={logo} />,
+        headerTitle: <Image source={Logo} />,
         headerTintColor: '#17496E'
     }
-};
-
-const DrawerButton = ({ navigation }) => {
-    return (
-        <TouchableOpacity onPress={() => navigation.openDrawer()} style={{ padding: 10 }}>
-            <Icon name="menu" size={30} color="#17496E" />
-        </TouchableOpacity>
-    );
 };
 
 const AuthStack = createStackNavigator({
@@ -48,7 +41,7 @@ const HomeStack = createStackNavigator({
             headerLeft: <DrawerButton navigation={navigation} />,
         })
     },
-}, Header);
+}, HeaderConfig);
 
 const FavoriteStack = createStackNavigator({
     FavoriteScreen: {
@@ -57,7 +50,7 @@ const FavoriteStack = createStackNavigator({
             headerLeft: <DrawerButton navigation={navigation} />,
         })
     },
-}, Header);
+}, HeaderConfig);
 
 const AppStack = createDrawerNavigator({
     HomeStack: {

@@ -2,7 +2,7 @@ import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
 
-import { Logout } from '../pages/logout';
+import { Logout } from '../helpers/logout';
 
 const api = axios.create({
 	baseURL: 'https://ferbs89.herokuapp.com/api'
