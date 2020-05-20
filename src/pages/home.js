@@ -1,29 +1,14 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 
-import api from '../services/node-api';
 import { Logout } from '../helpers/logout'
 
 export default function HomeScreen({ navigation }) {
-    async function listUsers() {
-        await api.get("/users").then(response => {
-            const { users } = response.data;
-            Alert.alert(null, 'OK');
-
-        }).catch(error => {
-            console.log(error);
-        });
-    }
-
     return (
         <View style={styles.container}>
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Home</Text>
             </View>
-
-            <TouchableOpacity style={styles.button} onPress={listUsers}>
-                <Text style={styles.buttonText}>Testar API</Text>
-            </TouchableOpacity>
 
             <TouchableOpacity style={styles.button} onPress={Logout}>
                 <Text style={styles.buttonText}>Sair</Text>

@@ -15,6 +15,7 @@ import LoginScreen from './pages/login';
 import RegisterScreen from './pages/register';
 
 import HomeScreen from './pages/home';
+import UserScreen from './pages/users';
 import FavoriteScreen from './pages/favorites';
 
 const HeaderConfig = {
@@ -43,6 +44,15 @@ const HomeStack = createStackNavigator({
     },
 }, HeaderConfig);
 
+const UserStack = createStackNavigator({
+    UserScreen: {
+        screen: UserScreen,
+        navigationOptions: ({ navigation }) => ({
+            headerLeft: <DrawerButton navigation={navigation} />,
+        })
+    },
+}, HeaderConfig);
+
 const FavoriteStack = createStackNavigator({
     FavoriteScreen: {
         screen: FavoriteScreen,
@@ -58,6 +68,14 @@ const AppStack = createDrawerNavigator({
         navigationOptions: {
             drawerLabel: 'Home',
             drawerIcon: ({ tintColor }) => (<Icon name="home" size={26} color={tintColor} />)
+        }
+    },
+
+    UserStack: {
+        screen: UserStack,
+        navigationOptions: {
+            drawerLabel: 'Usuários',
+            drawerIcon: ({ tintColor }) => (<Icon name="person" size={26} color={tintColor} />)
         }
     },
 
