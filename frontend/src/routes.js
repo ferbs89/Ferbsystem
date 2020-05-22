@@ -1,15 +1,21 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch  } from 'react-router-dom';
+
+import PublicRoute from './components/PublicRoute';
+import PrivateRoute from './components/PrivateRoute';
 
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Wishlist from './pages/Wishlist';
 
 export default function Routes() {
     return (
         <BrowserRouter>
             <Switch>
-                <Route path="/" exact component={Login} />
-                <Route path="/register" component={Register} />
+                <PublicRoute path="/" exact component={Login} />
+                <PublicRoute path="/register" component={Register} />
+
+                <PrivateRoute path="/wishlist" component={Wishlist} />
             </Switch>
         </BrowserRouter>
     );

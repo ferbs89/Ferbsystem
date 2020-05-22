@@ -9,16 +9,15 @@
 	justify-content: center;
 }
 
-.login-container section {
+.login-container .content {
 	width: 100%;
-	max-width: 350px;
+	max-width: 560px;
+    padding: 8%;
+    background: #eef6fb;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
-.login-container section.form form {
-	margin-top: 32;
-}
-
-.login-container section.form form h1 {
-	font-size: 32px;
-	margin-bottom: 32px;
+.login-container .content form {
+	margin-top: 16px;
 }

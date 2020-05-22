@@ -11,8 +11,8 @@
 
 .register-container .content {
     width: 100%;
-    padding: 96px;
-    background: #f0f0f5;
+    padding: 8%;
+    background: #eef6fb;
     box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 
@@ -24,11 +24,6 @@
 .register-container .content section {
     width: 100%;
     max-width: 380px;
-}
-
-.register-container .content section h1 {
-    margin: 32px 0 16px;
-    font-size: 32px;
 }
 
 .register-container .content section p {
