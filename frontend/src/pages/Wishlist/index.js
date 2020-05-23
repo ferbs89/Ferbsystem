@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
+import FadeLoader from 'react-spinners/FadeLoader';
 
 import api from '../../services/node-api';
 
@@ -8,19 +9,21 @@ import Header from '../../components/Header';
 
 export default function Wishlist() {
 	const [wishlist, setWishlist] = useState([]);
+	const [loading, setLoading] = useState(false);
 	
 	const userId = localStorage.getItem('userId');
 
 	useEffect(() => {
-		api.get(`users/${userId}/wishlist`
+		setLoading(true);
 
-		).then(response => {
+		api.get(`users/${userId}/wishlist`).then(response => {
 			setWishlist(response.data);
+			setLoading(false);
 
 		}).catch(() => {
-			
+			setLoading(false);
 		});
-		
+
 	}, [userId]);
 
 	return (
@@ -28,6 +31,13 @@ export default function Wishlist() {
 			<Header />
 			<div className="content">
 				<h1>Lista de desejos</h1>
+
+				<div className="center">
+					<FadeLoader
+						color={"#17496E"}
+						loading={loading}
+					/>
+				</div>
 
 				<ul>
 					{wishlist.map(item => (

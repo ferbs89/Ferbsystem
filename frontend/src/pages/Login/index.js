@@ -7,15 +7,18 @@ import { login } from '../../services/auth';
 
 import './styles.css';
 import logoImg from '../../assets/logo@2x.png';
+import ButtonLoading from '../../components/ButtonLoading';
 
 export default function Login() {
 	const [email, setEmail] = useState('ferbs89@gmail.com');
 	const [password, setPassword] = useState('');
+	const [loading, setLoading] = useState(false);
 	
 	const history = useHistory();
 
 	async function handleLogin(e) {
 		e.preventDefault();
+		setLoading(true);
 
 		await api.post('login', {
             email,
@@ -24,18 +27,17 @@ export default function Login() {
         }).then(response => {
 			const { user, token } = response.data;
 
-			login(user, token);
-			
+			login(user, token);			
 			history.push('/wishlist');
 			
 		}).catch(() => {
-			
+			setLoading(false);
 		});
 	}
 
 	return (
 		<div className="login-container">
-			<div className="content">
+			<div className="login-content">
 				<div className="center">
 					<img src={logoImg} alt="Ferbsystem" />
 				</div>
@@ -55,7 +57,11 @@ export default function Login() {
 						onChange={e => setPassword(e.target.value)}
 					/>
 
-					<button className="button" type="submit">Entrar</button>
+					{!loading ? (
+						<button className="button" type="submit">Entrar</button>
+					) : (
+						<ButtonLoading loading={true} />
+					)}
 				</form>
 
 				<div className="center">

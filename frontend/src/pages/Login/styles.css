@@ -9,7 +9,7 @@
 	justify-content: center;
 }
 
-.login-container .content {
+.login-container .login-content {
 	width: 100%;
 	max-width: 560px;
     padding: 8%;
@@ -18,6 +18,6 @@
     border-radius: 8px;
 }
 
-.login-container .content form {
-	margin-top: 16px;
+.login-container .login-content form {
+	margin-top: 32px;
 }

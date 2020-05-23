@@ -7,13 +7,13 @@ export default function PublicRoute({ component: Component, ...rest }) {
     return (
         <Route
             {...rest}
-            render={props => {
-                return !isAuth() ? (
+            render={props => (
+                !isAuth() ? (
                     <Component {...props} />
                 ) : (
                     <Redirect to={{ pathname: "/wishlist", state: { from: props.location } }} />
-                );
-            }}
+                )
+            )}
         />
     );
 }

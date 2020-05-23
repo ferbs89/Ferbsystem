@@ -8,7 +8,7 @@ import logoImg from '../../assets/logo@2x.png';
 export default function Register() {
     return (
         <div className="register-container">
-            <div className="content">
+            <div className="register-content">
                 <section>
                     <img src={logoImg} alt="Ferbsystem" />
 

@@ -9,7 +9,7 @@
 	justify-content: center;
 }
 
-.register-container .content {
+.register-container .register-content {
     width: 100%;
     padding: 8%;
     background: #eef6fb;
@@ -21,18 +21,18 @@
     align-items: center;
 }
 
-.register-container .content section {
+.register-container .register-content section {
     width: 100%;
     max-width: 380px;
 }
 
-.register-container .content section p {
+.register-container .register-content section p {
    font-size: 18px;
    color: #737380;
    line-height: 32px;
 }
 
-.register-container .content form {
+.register-container .register-content form {
     width: 100%;
     max-width: 450px;
 }
