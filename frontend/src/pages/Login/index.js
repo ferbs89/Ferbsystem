@@ -42,9 +42,9 @@ export default function Login() {
 				password,
 
 			}).then(response => {
-				const { user, token } = response.data;
+				const { token } = response.data;
 
-				login(user, token);			
+				login(token);			
 				history.push('/wishlist');
 				
 			}).catch(() => {

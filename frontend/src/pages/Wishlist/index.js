@@ -4,6 +4,7 @@ import { FiTrash2 } from 'react-icons/fi';
 import FadeLoader from 'react-spinners/FadeLoader';
 
 import api from '../../services/node-api';
+import { getUserId } from '../../services/auth';
 
 import './styles.css';
 import Header from '../../components/Header';
@@ -12,8 +13,8 @@ export default function Wishlist() {
 	const [wishlist, setWishlist] = useState([]);
 	const [loading, setLoading] = useState(false);
 
-	const history = useHistory();	
-	const userId = localStorage.getItem('userId');
+	const history = useHistory();
+	const userId = getUserId();
 
 	useEffect(() => {
 		setLoading(true);

@@ -5,6 +5,7 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
 import api from '../../services/node-api';
+import { getUserId } from '../../services/auth';
 
 import './styles.css';
 import Header from '../../components/Header';
@@ -15,7 +16,7 @@ export default function WishlistNew() {
 	const [loading, setLoading] = useState(false);
 
 	const formRef = useRef(null);
-	const history = useHistory();	
+	const history = useHistory();
 
 	async function handleSubmit(data, { reset }) {
 		setLoading(true);
@@ -37,7 +38,7 @@ export default function WishlistNew() {
 			});
 
 			const { name, description, value } = data;
-			const userId = localStorage.getItem('userId');
+			const userId = getUserId();
 
 			api.post(`users/${userId}/wishlist`, {
 				name,

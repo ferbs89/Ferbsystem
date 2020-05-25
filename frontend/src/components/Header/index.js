@@ -2,12 +2,13 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiLogOut } from 'react-icons/fi';
 
-import { logout } from '../../services/auth';
+import { getTokenData, logout } from '../../services/auth';
 
 import './styles.css';
 import logoImg from '../../assets/logo.png';
 
 export default function Header() {
+	const { name, email } = getTokenData();
 	const history = useHistory();
 
 	function handleLogout() {
@@ -20,8 +21,8 @@ export default function Header() {
 			<img src={logoImg} alt="Ferbsystem" className="logo" />
 
 			<div>
-				<span className="name">{localStorage.getItem('userName')}</span>
-				<span className="email">{localStorage.getItem('userEmail')}</span>
+				<span className="name">{name}</span>
+				<span className="email">{email}</span>
 
 				<Link to="#" onClick={handleLogout}>
 					Sair
