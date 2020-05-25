@@ -7,15 +7,15 @@ import * as Yup from 'yup';
 import api from '../../services/node-api';
 
 import './styles.css';
-import logoImg from '../../assets/logo.png';
+import Header from '../../components/Header';
 import Input from '../../components/Form/Input';
 import ButtonLoading from '../../components/ButtonLoading';
 
-export default function Register() {
+export default function WishlistNew() {
 	const [loading, setLoading] = useState(false);
 
 	const formRef = useRef(null);
-	const history = useHistory();
+	const history = useHistory();	
 
 	async function handleSubmit(data, { reset }) {
 		setLoading(true);
@@ -25,34 +25,33 @@ export default function Register() {
 				name: Yup.string()
 					.required('Nome obrigatório.'),
 
-				email: Yup.string()
-					.email('E-mail inválido.')
-					.required('E-mail obrigatório.'),
+				description: Yup.string()
+					.required('Descrição obrigatória.'),
 
-				password: Yup.string()
-					.min(6, 'A senha deve ter no mínimo 6 caracteres.')
-					.required('Senha obrigatória.')
+				value: Yup.string()
+					.required('Valor obrigatório.')
 			});
 
 			await schema.validate(data, {
 				abortEarly: false,
 			});
 
-			const { name, email, password } = data;
+			const { name, description, value } = data;
+			const userId = localStorage.getItem('userId');
 
-			api.post('users', {
+			api.post(`users/${userId}/wishlist`, {
 				name,
-				email,
-				password,
+				description,
+				value,
 			
 			}).then(response => {
-				alert('Usuário cadastrado com sucesso.');
-				history.push('/');
+				alert('Registro cadastrado com sucesso.');
+				history.push('/wishlist');
 
 			}).catch(() => {
 				setLoading(false);
 			});
-		
+
 		} catch (err) {
 			if (err instanceof Yup.ValidationError) {
 				const errorMessages = {};
@@ -67,26 +66,23 @@ export default function Register() {
 			setLoading(false);
 		}
 	}
-	
+
 	return (
-		<div className="register-container">
-			<div className="register-content">
-				<section>
-					<img src={logoImg} alt="Ferbsystem" className="logo" />
-
-					<h1>Criar uma conta</h1>
-					<p>Faça seu cadastro para entrar na plataforma.</p>
-
-					<Link className="back-link" to="/">
-						<FiArrowLeft size={16} color="#17496E" />
-						Voltar para o login
-					</Link>
-				</section>
+		<div className="container">
+			<Header />
+			
+			<div className="content">
+				<h1>Lista de desejos</h1>
 
 				<Form ref={formRef} onSubmit={handleSubmit}>
-					<Input name="name" placeholder="Nome" />
-					<Input type="email" name="email" placeholder="E-mail" />
-					<Input type="password" name="password" placeholder="Senha" />
+					<label>Nome</label>
+					<Input name="name" />
+
+					<label>Descrição</label>
+					<Input name="description" />
+
+					<label>Valor R$</label>
+					<Input type="number" step="0.01" max="9999999" name="value" />
 
 					{!loading ? (
 						<button className="button" type="submit">Cadastrar</button>
@@ -94,7 +90,12 @@ export default function Register() {
 						<ButtonLoading loading={true} />
 					)}
 				</Form>
+
+				<Link className="back-link" to="/wishlist">
+					<FiArrowLeft size={16} color="#17496E" />
+					Voltar
+				</Link>
 			</div>
 		</div>
-	);
+	)
 }

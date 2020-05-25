@@ -6,7 +6,9 @@ import PrivateRoute from './components/PrivateRoute';
 
 import Login from './pages/Login';
 import Register from './pages/Register';
+
 import Wishlist from './pages/Wishlist';
+import WishlistNew from './pages/WishlistNew';
 
 export default function Routes() {
     return (
@@ -15,7 +17,8 @@ export default function Routes() {
                 <PublicRoute path="/" exact component={Login} />
                 <PublicRoute path="/register" component={Register} />
 
-                <PrivateRoute path="/wishlist" component={Wishlist} />
+                <PrivateRoute path="/wishlist" exact component={Wishlist} />
+                <PrivateRoute path="/wishlist/new" component={WishlistNew} />
             </Switch>
         </BrowserRouter>
     );

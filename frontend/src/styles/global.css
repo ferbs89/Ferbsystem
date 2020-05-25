@@ -74,7 +74,6 @@ button {
     text-align: center;
     text-decoration: none;
     font-size: 18px;
-    line-height: 60px;
     transition: filter 0.2s;
 }
 
@@ -105,4 +104,17 @@ button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.page-title {
+    display: flex;
+}
+
+.page-title button {
+    width: auto;
+    height: 40px;
+    margin-left: auto;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px;
 }

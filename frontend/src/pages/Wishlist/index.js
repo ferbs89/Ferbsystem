@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { FiTrash2 } from 'react-icons/fi';
 import FadeLoader from 'react-spinners/FadeLoader';
 
@@ -10,7 +11,8 @@ import Header from '../../components/Header';
 export default function Wishlist() {
 	const [wishlist, setWishlist] = useState([]);
 	const [loading, setLoading] = useState(false);
-	
+
+	const history = useHistory();	
 	const userId = localStorage.getItem('userId');
 
 	useEffect(() => {
@@ -31,13 +33,13 @@ export default function Wishlist() {
 			<Header />
 			
 			<div className="content">
-				<h1>Lista de desejos</h1>
+				<div className="page-title">
+					<h1>Lista de desejos</h1>
+					<button className="button" onClick={() => history.push('/wishlist/new') }>Adicionar</button>
+				</div>
 
 				<div className="center">
-					<FadeLoader
-						color={"#dcdce6"}
-						loading={loading}
-					/>
+					<FadeLoader color={"#dcdce6"} loading={loading} />
 				</div>
 
 				<ul>
