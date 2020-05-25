@@ -1,29 +1,47 @@
 header {
-    width: 100%;
-    max-width: 1180px;
-    background: #eef6fb;
-    margin: 0px auto;
-    padding: 32px;
-
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	max-width: 1180px;
+	margin: 0px auto;
+	padding: 32px;
+	border-bottom: 1px solid #dcdce6;    
 }
 
-header span {
-    font-size: 16px;
-    margin-left: 24px;
+header div {
+	margin-left: auto;
+	text-align: right;
 }
 
-header button {
-    width: 60px;
-    height: 60px;
-    border-radius: 4px;
-    border: 1px solid #dcdce6;
-    background: transparent;
-    margin-left: auto;
-    transition: border-color 0.2s;
+header div span {
+	display: block;
+	margin-bottom: 8px;
 }
 
-header button:hover {
-    border-color: #999;
+header div span.name {
+	color: #41414d;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+header div span.email {
+	color: #737380;
+}
+
+header div a {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	color: #17496E;
+	text-decoration: none;
+	font-weight: 500;
+	transition: opacity 0.2s;
+}
+
+header div a:hover {
+	opacity: 0.8;
+}
+
+header div svg {
+	margin-left: 8px;
 }

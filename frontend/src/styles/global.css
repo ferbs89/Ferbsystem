@@ -13,6 +13,10 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+.logo {
+    height: 64px;
+}
+
 .container {
     width: 100%;
     max-width: 1180px;
@@ -23,20 +27,12 @@ body {
 
 .content {
     background: #FFF;
-    padding: 0 32px 32px;
+    padding: 32px;
 }
 
 h1 {
-    padding: 32px 0 16px;
+    margin-bottom: 16px;
     font-size: 32px;
-}
-
-input, button, textarea {
-    font: 400 18px Roboto, sans-serif;
-}
-
-button {
-    cursor: pointer;
 }
 
 form input {
@@ -46,7 +42,24 @@ form input {
     border: 1px solid #dcdce6;
     border-radius: 8px;
     padding: 0 24px;
+}
+
+form .field {
     margin-bottom: 16px;
+}
+
+form .field span {
+    display: block;
+    color: #F00;
+    margin-top: 8px;
+}
+
+input, button, textarea {
+    font: 400 18px Roboto, sans-serif;
+}
+
+button {
+    cursor: pointer;
 }
 
 .button {

@@ -1,11 +1,12 @@
 import axios from 'axios';
+import { getToken, logout } from './auth';
 
 const api = axios.create({
 	baseURL: 'https://ferbs89.herokuapp.com/api'
 });
 
 api.interceptors.request.use(async config => {
-	const token = localStorage.getItem('token');
+	const token = getToken();
 
 	if (token)
 		config.headers.Authorization = `Bearer ${token}`;
@@ -19,8 +20,13 @@ api.interceptors.response.use(
 	},
 
 	(error) => {
-		if (error.response === undefined || error.response.status === 500) {
+		if (!error.response || error.response.status === 500) {
 			alert('Não foi possível se conectar com o servidor.');
+
+		} else if (error.response.status === 401 && getToken()) {
+			logout();
+			window.location = '/';
+		
 		} else {
 			alert(error.response.data.error);
 		}

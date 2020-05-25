@@ -1,68 +1,88 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiLogIn } from 'react-icons/fi';
+import { Form } from '@unform/web';
+import * as Yup from 'yup';
 
 import api from '../../services/node-api';
 import { login } from '../../services/auth';
 
 import './styles.css';
-import logoImg from '../../assets/logo@2x.png';
+import logoImg from '../../assets/logo.png';
+import Input from '../../components/Form/Input';
 import ButtonLoading from '../../components/ButtonLoading';
 
 export default function Login() {
-	const [email, setEmail] = useState('ferbs89@gmail.com');
-	const [password, setPassword] = useState('');
 	const [loading, setLoading] = useState(false);
 	
+	const formRef = useRef(null);
 	const history = useHistory();
 
-	async function handleLogin(e) {
-		e.preventDefault();
+	async function handleLogin(data, { reset }) {
 		setLoading(true);
 
-		await api.post('login', {
-            email,
-            password,
+		try {
+			const schema = Yup.object().shape({
+				email: Yup.string()
+					.email('E-mail inválido.')
+					.required('E-mail obrigatório.'),
 
-        }).then(response => {
-			const { user, token } = response.data;
+				password: Yup.string()
+					.required('Senha obrigatória.')
+			});
 
-			login(user, token);			
-			history.push('/wishlist');
-			
-		}).catch(() => {
+			await schema.validate(data, {
+				abortEarly: false,
+			});
+
+			const { email, password } = data;
+
+			await api.post('login', {
+				email,
+				password,
+
+			}).then(response => {
+				const { user, token } = response.data;
+
+				login(user, token);			
+				history.push('/wishlist');
+				
+			}).catch(() => {
+				setLoading(false);
+			});
+
+		} catch (err) {
+			if (err instanceof Yup.ValidationError) {
+				const errorMessages = {};
+
+				err.inner.forEach(error => {
+					errorMessages[error.path] = error.message;
+				});
+
+				formRef.current.setErrors(errorMessages);
+			}
+
 			setLoading(false);
-		});
+		}	
 	}
 
 	return (
 		<div className="login-container">
 			<div className="login-content">
 				<div className="center">
-					<img src={logoImg} alt="Ferbsystem" />
+					<img src={logoImg} alt="Ferbsystem" className="logo" />
 				</div>
 
-				<form onSubmit={handleLogin}>
-					<input
-						type="email"
-						placeholder="E-mail"
-						value={email}
-						onChange={e => setEmail(e.target.value)}
-					/>
-
-					<input 
-						type="password"
-						placeholder="Senha"
-						value={password}
-						onChange={e => setPassword(e.target.value)}
-					/>
+				<Form ref={formRef} onSubmit={handleLogin}>
+					<Input type="email" name="email" placeholder="E-mail" />
+					<Input type="password" name="password" placeholder="Senha" />
 
 					{!loading ? (
 						<button className="button" type="submit">Entrar</button>
 					) : (
 						<ButtonLoading loading={true} />
 					)}
-				</form>
+				</Form>
 
 				<div className="center">
 					<Link className="back-link" to="/register">

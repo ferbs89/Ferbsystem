@@ -29,12 +29,13 @@ export default function Wishlist() {
 	return (
 		<div className="container">
 			<Header />
+			
 			<div className="content">
 				<h1>Lista de desejos</h1>
 
 				<div className="center">
 					<FadeLoader
-						color={"#17496E"}
+						color={"#dcdce6"}
 						loading={loading}
 					/>
 				</div>

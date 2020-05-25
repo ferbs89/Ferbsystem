@@ -26,6 +26,10 @@
     max-width: 380px;
 }
 
+.register-container .register-content section h1 {
+    margin-top: 32px;
+}
+
 .register-container .register-content section p {
    font-size: 18px;
    color: #737380;
