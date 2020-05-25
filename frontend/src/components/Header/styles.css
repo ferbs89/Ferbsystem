@@ -29,7 +29,7 @@ header div span.email {
 }
 
 header div a {
-	display: flex;
+	display: inline-flex;
 	align-items: center;
 	justify-content: flex-end;
 	color: #17496E;

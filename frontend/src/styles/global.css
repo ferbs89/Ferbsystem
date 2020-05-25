@@ -83,7 +83,7 @@ button {
 }
 
 .back-link {
-	display: flex;
+	display: inline-flex;
 	align-items: center;
 	margin-top: 32px;
 	color: #17496E;

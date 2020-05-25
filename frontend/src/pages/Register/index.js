@@ -1,17 +1,25 @@
-import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
+import api from '../../services/node-api';
+
 import './styles.css';
 import logoImg from '../../assets/logo.png';
 import Input from '../../components/Form/Input';
+import ButtonLoading from '../../components/ButtonLoading';
 
 export default function Register() {
+	const [loading, setLoading] = useState(false);
+
 	const formRef = useRef(null);
+	const history = useHistory();
 
 	async function handleSubmit(data, { reset }) {
+		setLoading(true);
+
 		try {
 			const schema = Yup.object().shape({
 				name: Yup.string()
@@ -30,10 +38,20 @@ export default function Register() {
 				abortEarly: false,
 			});
 
-			console.log(data);
+			const { name, email, password } = data;
 
-			formRef.current.setErrors({});
-			reset();
+			api.post('users', {
+				name,
+				email,
+				password,
+			
+			}).then(response => {
+				alert('Usuário cadastrado com sucesso.');
+				history.push('/');
+
+			}).catch(() => {
+				setLoading(false);
+			});			
 		
 		} catch (err) {
 			if (err instanceof Yup.ValidationError) {
@@ -45,6 +63,8 @@ export default function Register() {
 
 				formRef.current.setErrors(errorMessages);
 			}
+
+			setLoading(false);
 		}	
 	}
 	
@@ -68,7 +88,11 @@ export default function Register() {
 					<Input type="email" name="email" placeholder="E-mail" />
 					<Input type="password" name="password" placeholder="Senha" />
 
-					<button className="button" type="submit">Cadastrar</button>
+					{!loading ? (
+						<button className="button" type="submit">Cadastrar</button>
+					) : (
+						<ButtonLoading loading={true} />
+					)}
 				</Form>
 			</div>
 		</div>
