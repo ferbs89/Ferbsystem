@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getToken, logout } from './auth';
 
 const api = axios.create({
-	baseURL: 'https://ferbs89.herokuapp.com/api'
+	baseURL: process.env.REACT_APP_BASE_URL
 });
 
 api.interceptors.request.use(async config => {

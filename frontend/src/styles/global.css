@@ -1,84 +1,83 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 * {
-    margin: 0;
-    padding: 0;
-    outline: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	box-sizing: border-box;
 }
 
 body {
-    font: 400 14px Roboto, sans-serif;
-    background: #17496E;
-    -webkit-font-smoothing: antialiased;
+	font: 400 14px Roboto, sans-serif;
+	background: #17496E;
+	-webkit-font-smoothing: antialiased;
 }
 
 .logo {
-    height: 64px;
+	height: 64px;
 }
 
 .container {
-    width: 100%;
-    max-width: 1180px;
-    height: 100vh;
-    background: #FFF;
-    margin: 0px auto;
+	width: 100%;
+	max-width: 1180px;
+	height: 100vh;
+	background: #FFF;
+	margin: 0px auto;
 }
 
 .content {
-    background: #FFF;
-    padding: 32px;
+	background: #FFF;
+	padding: 32px;
 }
 
 h1 {
-    margin-bottom: 16px;
-    font-size: 32px;
+	font-size: 32px;
 }
 
 form input {
-    width: 100%;
-    height: 60px;
-    color: #333;
-    border: 1px solid #dcdce6;
-    border-radius: 8px;
-    padding: 0 24px;
+	width: 100%;
+	height: 60px;
+	color: #333;
+	border: 1px solid #dcdce6;
+	border-radius: 8px;
+	padding: 0 24px;
 }
 
 form .field {
-    margin-bottom: 16px;
+	margin-bottom: 16px;
 }
 
 form .field span {
-    display: block;
-    color: #F00;
-    margin-top: 8px;
+	display: block;
+	color: #F00;
+	margin-top: 8px;
 }
 
 input, button, textarea {
-    font: 400 18px Roboto, sans-serif;
+	font: 400 18px Roboto, sans-serif;
 }
 
 button {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .button {
-    width: 100%;
-    height: 60px;
-    background: #17496E;
-    border: 0;
-    border-radius: 8px;
-    color: #FFF;
-    font-weight: 700;
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-    font-size: 18px;
-    transition: filter 0.2s;
+	width: 100%;
+	height: 60px;
+	background: #17496E;
+	border: 0;
+	border-radius: 8px;
+	color: #FFF;
+	font-weight: 700;
+	display: inline-block;
+	text-align: center;
+	text-decoration: none;
+	font-size: 18px;
+	transition: filter 0.2s;
 }
 
 .button:hover {
-    filter: brightness(90%);
+	filter: brightness(90%);
 }
 
 .back-link {
@@ -107,14 +106,14 @@ button {
 }
 
 .page-title {
-    display: flex;
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+	height: 60px;
 }
 
 .page-title button {
-    width: auto;
-    height: 40px;
-    margin-left: auto;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 8px;
+	width: auto;
+	margin-left: auto;
+	padding: 16px;
 }

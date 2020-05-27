@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import { Form } from '@unform/web';
@@ -7,17 +7,31 @@ import * as Yup from 'yup';
 import api from '../../services/node-api';
 import { getUserId } from '../../services/auth';
 
-import './styles.css';
 import Header from '../../components/Header';
 import Input from '../../components/Form/Input';
 import ButtonLoading from '../../components/ButtonLoading';
 
-export default function WishlistNew() {
+export default function WishlistEdit(props) {
 	const [loading, setLoading] = useState(false);
 
 	const formRef = useRef(null);
 	const history = useHistory();
 	const userId = getUserId();
+	const { id } = props.match.params;
+
+	useEffect(() => {
+		api.get(`users/${userId}/wishlist/${id}`).then(response => {
+			const { name, description, value } = response.data
+			
+			formRef.current.setData({ 
+				name, 
+				description, 
+				value,
+			});
+
+		}).catch(() => {});
+
+	}, [userId, id]);
 
 	async function handleSubmit(data, { reset }) {
 		setLoading(true);
@@ -40,7 +54,7 @@ export default function WishlistNew() {
 
 			const { name, description, value } = data;
 
-			api.post(`users/${userId}/wishlist`, {
+			api.put(`users/${userId}/wishlist/${id}`, {
 				name,
 				description,
 				value,
@@ -100,5 +114,5 @@ export default function WishlistNew() {
 				</Link>
 			</div>
 		</div>
-	)
+	);
 }

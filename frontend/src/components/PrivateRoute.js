@@ -1,14 +1,14 @@
 import React from 'react';
 import { Route, Redirect  } from 'react-router-dom';
 
-import { getToken } from '../services/auth';
+import { getSession } from '../services/auth';
 
 export default function PrivateRoute({ component: Component, ...rest }) {
     return (
         <Route
             {...rest}
             render={props => (
-                getToken() ? (
+                getSession() ? (
                     <Component {...props} />
                 ) : (
                     <Redirect to={{ pathname: "/", state: { from: props.location } }} />

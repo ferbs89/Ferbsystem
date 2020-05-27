@@ -15,7 +15,7 @@ header div {
 
 header div span {
 	display: block;
-	margin-bottom: 8px;
+	margin-bottom: 4px;
 }
 
 header div span.name {
@@ -32,6 +32,7 @@ header div a {
 	display: inline-flex;
 	align-items: center;
 	justify-content: flex-end;
+	margin-top: 4px;
 	color: #17496E;
 	text-decoration: none;
 	font-weight: 500;

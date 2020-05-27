@@ -9,6 +9,7 @@ import Register from './pages/Register';
 
 import Wishlist from './pages/Wishlist';
 import WishlistNew from './pages/WishlistNew';
+import WishlistEdit from './pages/WishlistEdit';
 
 export default function Routes() {
     return (
@@ -19,6 +20,7 @@ export default function Routes() {
 
                 <PrivateRoute path="/wishlist" exact component={Wishlist} />
                 <PrivateRoute path="/wishlist/new" component={WishlistNew} />
+                <PrivateRoute path="/wishlist/:id" component={WishlistEdit} />
             </Switch>
         </BrowserRouter>
     );

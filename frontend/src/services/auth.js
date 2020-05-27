@@ -12,17 +12,18 @@ export function getToken() {
 	return localStorage.getItem('token');
 }
 
-export function getTokenData() {
-	try {
-		return jwt.verify(getToken(), process.env.REACT_APP_SECRET);
+export function getSession() {
+	if (!getToken())
+		return false;
 
-	} catch (error) {
-		logout();
-		window.location = '/';
-	}	
+	return jwt.verify(getToken(), process.env.REACT_APP_SECRET,
+		function(error, decoded) {
+			return (error) ? (false) : (decoded);
+		}
+	);
 }
 
 export function getUserId() {
-	const { id } = getTokenData();
+	const { id } = getSession();
 	return id;
 }

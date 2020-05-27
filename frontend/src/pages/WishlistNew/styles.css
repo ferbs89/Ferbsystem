@@ -1,6 +1,7 @@
 .container .content form {
     width: 100%;
     max-width: 560px;
+    margin-top: 32px;
 }
 
 .container .content form label {
