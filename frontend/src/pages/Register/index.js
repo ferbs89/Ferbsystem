@@ -6,7 +6,6 @@ import * as Yup from 'yup';
 
 import api from '../../services/node-api';
 
-import './styles.css';
 import logoImg from '../../assets/logo.png';
 import Input from '../../components/Form/Input';
 import ButtonLoading from '../../components/ButtonLoading';
@@ -69,9 +68,9 @@ export default function Register() {
 	}
 	
 	return (
-		<div className="register-container">
-			<div className="register-content">
-				<div className="register-logo">
+		<div className="login-container">
+			<div className="login-content">
+				<div className="login-logo">
 					<img src={logoImg} alt="Ferbsystem" />
 				</div>
 

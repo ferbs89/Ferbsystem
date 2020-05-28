@@ -7,7 +7,6 @@ import * as Yup from 'yup';
 import api from '../../services/node-api';
 import { login } from '../../services/auth';
 
-import './styles.css';
 import logoImg from '../../assets/logo.png';
 import Input from '../../components/Form/Input';
 import ButtonLoading from '../../components/ButtonLoading';
