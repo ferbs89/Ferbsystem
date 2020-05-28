@@ -69,8 +69,8 @@ export default function Login() {
 	return (
 		<div className="login-container">
 			<div className="login-content">
-				<div className="center">
-					<img src={logoImg} alt="Ferbsystem" className="logo" />
+				<div className="login-logo">
+					<img src={logoImg} alt="Ferbsystem" />
 				</div>
 
 				<Form ref={formRef} onSubmit={handleLogin}>

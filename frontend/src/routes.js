@@ -8,8 +8,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 
 import Wishlist from './pages/Wishlist';
-import WishlistNew from './pages/WishlistNew';
-import WishlistEdit from './pages/WishlistEdit';
+import WishlistForm from './pages/Wishlist/form';
 
 export default function Routes() {
     return (
@@ -19,8 +18,8 @@ export default function Routes() {
                 <PublicRoute path="/register" component={Register} />
 
                 <PrivateRoute path="/wishlist" exact component={Wishlist} />
-                <PrivateRoute path="/wishlist/new" component={WishlistNew} />
-                <PrivateRoute path="/wishlist/:id" component={WishlistEdit} />
+                <PrivateRoute path="/wishlist/new" component={WishlistForm} />
+                <PrivateRoute path="/wishlist/:id" component={WishlistForm} />
             </Switch>
         </BrowserRouter>
     );

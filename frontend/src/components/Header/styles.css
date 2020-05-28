@@ -8,27 +8,38 @@ header {
 	border-bottom: 1px solid #dcdce6;    
 }
 
-header div {
+header .brand {
+	margin-right: 16px;
+}
+
+header .brand img {
+	width: 100%;
+	height: auto;
+	max-width: 231px;
+	max-height: 64px;
+}
+
+header .profile {
 	margin-left: auto;
 	text-align: right;
 }
 
-header div span {
+header .profile span {
 	display: block;
 	margin-bottom: 4px;
 }
 
-header div span.name {
+header .profile span.name {
 	color: #41414d;
 	font-size: 16px;
 	font-weight: 500;
 }
 
-header div span.email {
+header .profile span.email {
 	color: #737380;
 }
 
-header div a {
+header .profile a {
 	display: inline-flex;
 	align-items: center;
 	justify-content: flex-end;
@@ -39,10 +50,10 @@ header div a {
 	transition: opacity 0.2s;
 }
 
-header div a:hover {
+header .profile a:hover {
 	opacity: 0.8;
 }
 
-header div svg {
+header .profile svg {
 	margin-left: 8px;
 }

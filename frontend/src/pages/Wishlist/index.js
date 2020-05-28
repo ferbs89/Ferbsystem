@@ -11,14 +11,12 @@ import Header from '../../components/Header';
 
 export default function Wishlist() {
 	const [wishlist, setWishlist] = useState([]);
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 
-	const history = useHistory();
 	const userId = getUserId();
+	const history = useHistory();
 
 	useEffect(() => {
-		setLoading(true);
-
 		api.get(`users/${userId}/wishlist`).then(response => {
 			setWishlist(response.data);
 			setLoading(false);
@@ -26,7 +24,6 @@ export default function Wishlist() {
 		}).catch(() => {
 			setLoading(false);
 		});
-
 	}, [userId]);
 
 	async function handleDelete(id) {
@@ -73,5 +70,5 @@ export default function Wishlist() {
 				</ul>
 			</div>
 		</div>
-	)
+	);
 }

@@ -18,9 +18,11 @@ export default function Header() {
 
 	return (
 		<header>
-			<img src={logoImg} alt="Ferbsystem" className="logo" />
+			<div className="brand">
+				<img src={logoImg} alt="Ferbsystem" />
+			</div>
 
-			<div>
+			<div className="profile">
 				<span className="name">{name}</span>
 				<span className="email">{email}</span>
 

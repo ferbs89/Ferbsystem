@@ -71,17 +71,12 @@ export default function Register() {
 	return (
 		<div className="register-container">
 			<div className="register-content">
-				<section>
-					<img src={logoImg} alt="Ferbsystem" className="logo" />
+				<div className="register-logo">
+					<img src={logoImg} alt="Ferbsystem" />
+				</div>
 
-					<h1>Criar uma conta</h1>
-					<p>Faça seu cadastro para entrar na plataforma.</p>
-
-					<Link className="back-link" to="/">
-						<FiArrowLeft size={16} color="#17496E" />
-						Voltar para o login
-					</Link>
-				</section>
+				<h1>Criar uma conta</h1>
+				<p>Faça seu cadastro para entrar na plataforma.</p>
 
 				<Form ref={formRef} onSubmit={handleSubmit}>
 					<Input name="name" placeholder="Nome" />
@@ -94,6 +89,13 @@ export default function Register() {
 						<ButtonLoading loading={true} />
 					)}
 				</Form>
+
+				<div className="center">
+					<Link className="back-link" to="/">
+						<FiArrowLeft size={16} color="#17496E" />
+						Voltar para o login
+					</Link>
+				</div>
 			</div>
 		</div>
 	);

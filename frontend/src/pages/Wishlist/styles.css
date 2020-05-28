@@ -6,7 +6,7 @@
 }
 
 .container ul li {
-    padding: 24px;
+    padding: 16px;
     border: 1px solid #dcdce6;
     border-radius: 8px;
     position: relative;
@@ -15,16 +15,16 @@
 .container ul li button {
     background: #FFF;
     position: absolute;
-    top: 24px;
-    right: 24px;
+    top: 16px;
+    right: 16px;
     border: 0;
 }
 
 .container ul li button + button {
     background: #FFF;
     position: absolute;
-    top: 56px;
-    right: 24px;
+    top: 48px;
+    right: 16px;
     border: 0;
 }
 
