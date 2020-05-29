@@ -185,7 +185,7 @@ button {
 @media screen and (max-width: 375px) {
 	.page-title {
 		flex-direction: column;
-		align-items: flex-start;
+		align-items: normal;
 		height: auto;
 	}
 
@@ -196,5 +196,9 @@ button {
 	.page-title button {
 		width: 100%;
 		margin-left: 0px;
+	}
+
+	.Toastify__toast {
+		border-radius: 0px;
 	}
 }

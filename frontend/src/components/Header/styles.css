@@ -58,10 +58,29 @@ header .profile svg {
 @media screen and (max-width: 375px) {
 	header {
 		flex-direction: column;
+		align-items: normal;
 	}
 
     header .brand {
 		margin-right: 0px;
 		margin-bottom: 16px;
+	}
+
+	header .profile {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-left: 0px;
+		text-align: left;
+	}
+
+	header .profile span,
+	header .profile a {
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+
+	header .profile span.name {
+		margin-bottom: 4px;
 	}
 }

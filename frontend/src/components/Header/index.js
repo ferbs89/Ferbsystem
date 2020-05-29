@@ -23,8 +23,10 @@ export default function Header() {
 			</div>
 
 			<div className="profile">
-				<span className="name">{name}</span>
-				<span className="email">{email}</span>
+				<div>
+					<span className="name">{name}</span>
+					<span className="email">{email}</span>
+				</div>
 
 				<Link to="" onClick={handleLogout}>
 					Sair
