@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
+import { toast } from 'react-toastify';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
@@ -41,6 +42,7 @@ export default function WishlistForm(props) {
 
 	async function handleSubmit(data, { reset }) {
 		setLoading(true);
+		formRef.current.setErrors({});
 
 		try {
 			const schema = Yup.object().shape({
@@ -67,7 +69,7 @@ export default function WishlistForm(props) {
 					value,
 				
 				}).then(response => {
-					alert('Registro salvo com sucesso.');
+					toast.success('Registro salvo com sucesso.');
 					history.push('/wishlist');
 
 				}).catch(() => {
@@ -81,7 +83,7 @@ export default function WishlistForm(props) {
 					value,
 				
 				}).then(response => {
-					alert('Registro salvo com sucesso.');
+					toast.success('Registro salvo com sucesso.');
 					history.push('/wishlist');
 
 				}).catch(() => {

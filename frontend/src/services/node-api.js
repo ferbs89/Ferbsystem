@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import { getToken, logout } from './auth';
 
 const api = axios.create({
@@ -21,14 +22,14 @@ api.interceptors.response.use(
 
 	(error) => {
 		if (!error.response || error.response.status === 500) {
-			alert('Não foi possível se conectar com o servidor.');
+			toast.error('Não foi possível se conectar com o servidor.');
 
 		} else if (error.response.status === 401 && getToken()) {
 			logout();
 			window.location = '/';
 		
 		} else {
-			alert(error.response.data.error);
+			toast.error(error.response.data.error);
 		}
 
 		return Promise.reject(error.response);

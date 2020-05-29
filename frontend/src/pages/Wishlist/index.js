@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FiEdit, FiTrash2 } from 'react-icons/fi';
+import { toast } from 'react-toastify';
 import FadeLoader from 'react-spinners/FadeLoader';
 
 import api from '../../services/node-api';
@@ -29,6 +30,7 @@ export default function Wishlist() {
 	async function handleDelete(id) {
 		await api.delete(`wishlist/${id}`).then(response => {
 			setWishlist(wishlist.filter(wishlist => wishlist.id !== id));
+			toast.success('Registro excluído com sucesso.');
 
 		}).catch(() => {});
 	}

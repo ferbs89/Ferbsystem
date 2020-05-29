@@ -19,6 +19,7 @@ export default function Login() {
 
 	async function handleLogin(data, { reset }) {
 		setLoading(true);
+		formRef.current.setErrors({});
 
 		try {
 			const schema = Yup.object().shape({

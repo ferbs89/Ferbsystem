@@ -54,3 +54,14 @@ header .profile a:hover {
 header .profile svg {
 	margin-left: 8px;
 }
+
+@media screen and (max-width: 375px) {
+	header {
+		flex-direction: column;
+	}
+
+    header .brand {
+		margin-right: 0px;
+		margin-bottom: 16px;
+	}
+}
