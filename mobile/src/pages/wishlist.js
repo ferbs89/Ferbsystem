@@ -4,8 +4,8 @@ import { StyleSheet, View, Text, ActivityIndicator, FlatList } from 'react-nativ
 import api from '../services/node-api';
 import styles from '../styles/global';
 
-export default function UsersScreen({ navigation }) {
-	const [users, setUsers] = useState([]);
+export default function WishlistScreen({ navigation }) {
+	const [wishlist, setWishlist] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [refreshing, setRefreshing] = useState(false);
 
@@ -14,12 +14,12 @@ export default function UsersScreen({ navigation }) {
 	}, []);
 
 	async function fetchData() {
-		await api.get('users').then(response => {
-			setUsers(response.data.users);
+		await api.get(`users/1/wishlist`).then(response => {
+			setWishlist(response.data);
 			setLoading(false);
 
 		}).catch(error => {
-			setUsers([]);
+			setWishlist([]);
 			setLoading(false);
 		});		
 	}
@@ -27,7 +27,7 @@ export default function UsersScreen({ navigation }) {
 	function renderHeader() {
 		return (
 			<View style={styles.pageTitle}>
-				<Text style={styles.pageTitleText}>Usuários</Text>
+				<Text style={styles.pageTitleText}>Lista de desejos</Text>
 			</View>
 		);
 	}
@@ -35,8 +35,9 @@ export default function UsersScreen({ navigation }) {
 	function renderItem({ item }) {
 		return (
 			<View style={localStyles.itemContainer}>
-				<Text style={localStyles.userName}>{item.name}</Text>
-				<Text style={localStyles.userEmail}>{item.email}</Text>
+				<Text style={localStyles.itemName}>{item.name}</Text>
+				<Text style={localStyles.itemDescription}>{item.description}</Text>
+				<Text style={localStyles.itemDescription}>R$ {item.value}</Text>
 			</View>
 		);
 	}
@@ -47,7 +48,7 @@ export default function UsersScreen({ navigation }) {
 				<ActivityIndicator color="#17496E" size="large" style={{ padding: 16 }} />
 			) : (
 				<FlatList
-					data={users}
+					data={wishlist}
 					keyExtractor={item => item.id.toString()}
 					ListHeaderComponent={renderHeader}
 					renderItem={renderItem}
@@ -70,12 +71,18 @@ const localStyles = StyleSheet.create({
 		borderRadius: 8,
 	},
 
-	userName: {
+	itemName: {
 		color: "#41414d",
 		fontWeight: "bold",
+		marginBottom: 8,
 	},
 
-	userEmail: {
+	itemDescription: {
+		color: "#737380",
+		marginBottom: 8,
+	},
+
+	itemValue: {
 		color: "#737380",
 	},
 });

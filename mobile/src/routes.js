@@ -7,101 +7,94 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import Drawer from './components/Drawer';
 import DrawerButton from './components/DrawerButton';
 import Logo from './assets/logo.png';
 
-import SessionScreen from "./session";
+import SessionScreen from './session';
 import LoginScreen from './pages/login';
+import LogoutScreen from './pages/logout';
 import RegisterScreen from './pages/register';
 
-import HomeScreen from './pages/home';
+import WishlistScreen from './pages/wishlist';
 import UserScreen from './pages/users';
-import FavoriteScreen from './pages/favorites';
 
 const HeaderConfig = {
-    headerLayoutPreset: 'center',
-    defaultNavigationOptions: {
-        headerTitle: <Image source={Logo} />,
-        headerTintColor: '#17496E'
-    }
+	headerLayoutPreset: 'center',
+	defaultNavigationOptions: {
+		headerTitle: <Image source={Logo} style={{ marginTop: 10 }} />,
+		headerTintColor: '#17496E'
+	},
 };
 
 const AuthStack = createStackNavigator({
-    LoginScreen,
-    RegisterScreen,
+	LoginScreen,
+	RegisterScreen,
 }, {
-    defaultNavigationOptions: {
-        header: null,
-    }
+	defaultNavigationOptions: {
+		header: null,
+	}
 });
 
-const HomeStack = createStackNavigator({
-    HomeScreen: {
-        screen: HomeScreen,
-        navigationOptions: ({ navigation }) => ({
-            headerLeft: <DrawerButton navigation={navigation} />,
-        })
-    },
+const WishlistStack = createStackNavigator({
+	WishlistScreen: {
+		screen: WishlistScreen,
+		navigationOptions: ({ navigation }) => ({
+			headerLeft: <DrawerButton navigation={navigation} />,
+		})
+	},
 }, HeaderConfig);
 
 const UserStack = createStackNavigator({
-    UserScreen: {
-        screen: UserScreen,
-        navigationOptions: ({ navigation }) => ({
-            headerLeft: <DrawerButton navigation={navigation} />,
-        })
-    },
-}, HeaderConfig);
-
-const FavoriteStack = createStackNavigator({
-    FavoriteScreen: {
-        screen: FavoriteScreen,
-        navigationOptions: ({ navigation }) => ({
-            headerLeft: <DrawerButton navigation={navigation} />,
-        })
-    },
+	UserScreen: {
+		screen: UserScreen,
+		navigationOptions: ({ navigation }) => ({
+			headerLeft: <DrawerButton navigation={navigation} />,
+		})
+	},
 }, HeaderConfig);
 
 const AppStack = createDrawerNavigator({
-    HomeStack: {
-        screen: HomeStack,
-        navigationOptions: {
-            drawerLabel: 'Home',
-            drawerIcon: ({ tintColor }) => (<Icon name="home" size={26} color={tintColor} />)
-        }
-    },
+	WishlistStack: {
+		screen: WishlistStack,
+		navigationOptions: {
+			drawerLabel: 'Lista de desejos',
+			drawerIcon: ({ tintColor }) => (<Icon name="favorite-border" size={26} color={tintColor} />)
+		}
+	},
 
-    UserStack: {
-        screen: UserStack,
-        navigationOptions: {
-            drawerLabel: 'Usuários',
-            drawerIcon: ({ tintColor }) => (<Icon name="person" size={26} color={tintColor} />)
-        }
-    },
+	UserStack: {
+		screen: UserStack,
+		navigationOptions: {
+			drawerLabel: 'Usuários',
+			drawerIcon: ({ tintColor }) => (<Icon name="person-outline" size={26} color={tintColor} />)
+		}
+	},
 
-    FavoriteStack: {
-        screen: FavoriteStack,
-        navigationOptions: {
-            drawerLabel: 'Favoritos',
-            drawerIcon: ({ tintColor }) => (<Icon name="favorite" size={26} color={tintColor} />)
-        }
-    },
+	LogoutScreen: {
+		screen: LogoutScreen,
+		navigationOptions: {
+			drawerLabel: 'Sair',
+			drawerIcon: ({ tintColor }) => (<Icon name="exit-to-app" size={26} color={tintColor} />)
+		}
+	},
 }, {
-    contentOptions: {
-        activeTintColor: "#FFFFFF",
-        activeBackgroundColor: "#17496E",
-        inactiveTintColor: "#17496E",
-    }
+	contentComponent: Drawer,
+	contentOptions: {
+		activeTintColor: "#FFFFFF",
+		activeBackgroundColor: "#17496E",
+		inactiveTintColor: "#41414d",
+	},
 });
 
 const Routes = createAppContainer(
-    createSwitchNavigator({
-        Session: SessionScreen,
-        Auth: AuthStack,
-        App: AppStack,
-    }, {
-        initialRouteName: 'Session',
-    })
+	createSwitchNavigator({
+		Session: SessionScreen,
+		Auth: AuthStack,
+		App: AppStack,
+	}, {
+		initialRouteName: 'Session',
+	})
 );
 
 export default Routes;
