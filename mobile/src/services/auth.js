@@ -3,18 +3,18 @@ import NavigationService from '../services/navigation';
 
 // import jwt from 'jsonwebtoken';
 
-export function login(token) {
-	AsyncStorage.setItem('token', token);
+export async function login(token) {
+	await AsyncStorage.setItem('token', token);
 	NavigationService.navigate('WishlistScreen');
 }
 
-export function logout() {
-	AsyncStorage.removeItem('token');
+export async function logout() {
+	await AsyncStorage.removeItem('token');
 	NavigationService.navigate('LoginScreen');
 }
 
-export function getToken() {
-	return AsyncStorage.getItem('token');
+export async function getToken() {
+	return await AsyncStorage.getItem('token');
 }
 
 // export function getSession() {

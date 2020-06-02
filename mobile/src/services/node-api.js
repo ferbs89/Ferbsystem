@@ -1,15 +1,13 @@
-import { Alert } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
-
-import { logout } from '../services/auth';
+import { Alert } from 'react-native';
+import { getToken, logout } from '../services/auth';
 
 const api = axios.create({
 	baseURL: 'https://ferbs89.herokuapp.com/api'
 });
 
 api.interceptors.request.use(async config => {
-	const token = await AsyncStorage.getItem('token');
+	const token = await getToken();
 
 	if (token)
 		config.headers.Authorization = `Bearer ${token}`;
@@ -18,24 +16,22 @@ api.interceptors.request.use(async config => {
 });
 
 api.interceptors.response.use(
-	(response) => {
+	async (response) => {
 		return response;
 	},
 
 	async (error) => {
-		if (error.response) {
-			if (error.response.status == 401) {
-				logout();
+		if (!error.response || error.response.status === 500) {
+			Alert.alert(null, 'Não foi possível se conectar com o servidor.');
 
-			} else {
-				Alert.alert(null, error.response.data.error);
-			}
-
+		} else if (error.response.status === 401 && await getToken()) {
+			await logout();
+		
 		} else {
-			Alert.alert(null, 'Não foi possível carregar os dados.');
+			Alert.alert(null, error.response.data.error);
 		}
 
-		return Promise.reject(error);
+		return Promise.reject(error.response);
 	}
 );
 

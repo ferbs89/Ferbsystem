@@ -21,7 +21,7 @@ export default function WishlistScreen({ navigation }) {
 		}).catch(error => {
 			setWishlist([]);
 			setLoading(false);
-		});		
+		});
 	}
 
 	function renderHeader() {
@@ -37,7 +37,7 @@ export default function WishlistScreen({ navigation }) {
 			<View style={localStyles.itemContainer}>
 				<Text style={localStyles.itemName}>{item.name}</Text>
 				<Text style={localStyles.itemDescription}>{item.description}</Text>
-				<Text style={localStyles.itemDescription}>R$ {item.value}</Text>
+				<Text style={localStyles.itemValue}>R$ {item.value}</Text>
 			</View>
 		);
 	}

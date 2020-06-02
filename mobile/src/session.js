@@ -5,8 +5,13 @@ import LoadingScreen from './components/LoadingScreen';
 
 export default function SessionScreen({ navigation }) {
 	useEffect(() => {
-		navigation.navigate(getToken() ? 'WishlistScreen' : 'LoginScreen');
+		fetchData();
 	}, []);
+
+	async function fetchData() {
+		const token = await getToken();
+		navigation.navigate(token ? 'WishlistScreen' : 'LoginScreen');
+	}
 
 	return (
 		<LoadingScreen />
