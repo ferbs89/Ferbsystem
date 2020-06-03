@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import { toast } from 'react-toastify';
+import FadeLoader from 'react-spinners/FadeLoader';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
@@ -13,7 +14,8 @@ import Input from '../../components/Form/Input';
 import ButtonLoading from '../../components/ButtonLoading';
 
 export default function WishlistForm(props) {
-	const [loading, setLoading] = useState(false);
+	const [loadingPage, setLoadingPage] = useState(true);
+	const [loadingSubmit, setLoadingSubmit] = useState(false);
 
 	const { id } = props.match.params;
 
@@ -22,17 +24,21 @@ export default function WishlistForm(props) {
 	const history = useHistory();	
 
 	useEffect(() => {
-		if (!id)
+		if (!id) {
+			setLoadingPage(false);
 			return;
+		}
 
 		api.get(`users/${userId}/wishlist/${id}`).then(response => {
 			const { name, description, value } = response.data
 			
-			formRef.current.setData({ 
+			formRef.current.setData({
 				name, 
 				description, 
 				value,
 			});
+
+			setLoadingPage(false);
 
 		}).catch(() => {
 			history.push('/wishlist');
@@ -41,7 +47,7 @@ export default function WishlistForm(props) {
 	}, [userId, id, history]);
 
 	async function handleSubmit(data, { reset }) {
-		setLoading(true);
+		setLoadingSubmit(true);
 		formRef.current.setErrors({});
 
 		try {
@@ -73,7 +79,7 @@ export default function WishlistForm(props) {
 					history.push('/wishlist');
 
 				}).catch(() => {
-					setLoading(false);
+					setLoadingSubmit(false);
 				});
 			
 			} else {
@@ -87,7 +93,7 @@ export default function WishlistForm(props) {
 					history.push('/wishlist');
 
 				}).catch(() => {
-					setLoading(false);
+					setLoadingSubmit(false);
 				});
 			}
 
@@ -102,7 +108,7 @@ export default function WishlistForm(props) {
 				formRef.current.setErrors(errorMessages);
 			}
 
-			setLoading(false);
+			setLoadingSubmit(false);
 		}
 	}
 
@@ -115,27 +121,35 @@ export default function WishlistForm(props) {
 					<h1>Lista de desejos</h1>
 				</div>
 
-				<Form ref={formRef} onSubmit={handleSubmit}>
-					<label>Nome</label>
-					<Input name="name" />
+				{loadingPage &&
+					<div className="center">
+						<FadeLoader color={"#dcdce6"} loading={loadingPage} />
+					</div>
+				}
 
-					<label>Descrição</label>
-					<Input name="description" />
+				<div hidden={loadingPage}>
+					<Form ref={formRef} onSubmit={handleSubmit}>
+						<label>Nome</label>
+						<Input name="name" />
 
-					<label>Valor R$</label>
-					<Input type="number" step="0.01" max="9999999" name="value" />
+						<label>Descrição</label>
+						<Input name="description" />
 
-					{!loading ? (
-						<button className="button" type="submit">Salvar</button>
-					) : (
-						<ButtonLoading loading={true} />
-					)}
-				</Form>
+						<label>Valor R$</label>
+						<Input type="number" step="0.01" max="9999999" name="value" />
 
-				<Link className="back-link" to="/wishlist">
-					<FiArrowLeft size={16} color="#17496E" />
-					Voltar
-				</Link>
+						{!loadingSubmit ? (
+							<button className="button" type="submit">Salvar</button>
+						) : (
+							<ButtonLoading loading={true} />
+						)}
+					</Form>
+
+					<Link className="back-link" to="/wishlist">
+						<FiArrowLeft size={16} color="#17496E" />
+						Voltar
+					</Link>
+				</div>
 			</div>
 		</div>
 	);
