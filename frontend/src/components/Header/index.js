@@ -30,7 +30,7 @@ export default function Header() {
 
 				<Link to="" onClick={handleLogout}>
 					Sair
-					<FiLogOut size={16} color="#17496E" />
+					<FiLogOut size={20} color="#17496E" />
 				</Link>
 			</div>
 		</header>

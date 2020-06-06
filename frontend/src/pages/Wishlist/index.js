@@ -7,11 +7,12 @@ import FadeLoader from 'react-spinners/FadeLoader';
 import api from '../../services/node-api';
 import { getUserId } from '../../services/auth';
 
-import './styles.css';
 import Header from '../../components/Header';
+import Menu from '../../components/Menu';
 
 export default function Wishlist() {
 	const [wishlist, setWishlist] = useState([]);
+	const [list, setList] = useState([]);
 	const [loading, setLoading] = useState(true);
 
 	const userId = getUserId();
@@ -20,6 +21,7 @@ export default function Wishlist() {
 	useEffect(() => {
 		api.get(`users/${userId}/wishlist`).then(response => {
 			setWishlist(response.data);
+			setList(response.data);
 			setLoading(false);
 
 		}).catch(() => {
@@ -29,21 +31,35 @@ export default function Wishlist() {
 
 	async function handleDelete(id) {
 		await api.delete(`wishlist/${id}`).then(response => {
-			setWishlist(wishlist.filter(wishlist => wishlist.id !== id));
+			const updatedList = wishlist.filter(wishlist => wishlist.id !== id);
+
+			setWishlist(updatedList);
+			setList(updatedList);
+
 			toast.success('Registro excluído com sucesso.');
 
 		}).catch(() => {});
 	}
 
+	function handleSearch(e) {
+		const search = e.target.value.toLowerCase();
+		
+		setList(wishlist.filter(wishlist => wishlist.name.toLowerCase().includes(search)));
+	}
+
 	return (
 		<div className="container">
 			<Header />
+			<Menu />
 			
 			<div className="content">
 				<div className="page-title">
 					<h1>Lista de desejos</h1>
 					{!loading &&
-						<button className="button" onClick={() => history.push('/wishlist/new') }>Adicionar</button>
+						<div className="right">
+							<input type="text" name="search" placeholder="Pesquisar" onChange={handleSearch} autoComplete="off" />
+							<button className="button" onClick={() => history.push('/wishlist/new') }>Adicionar</button>
+						</div>
 					}
 				</div>
 
@@ -53,23 +69,39 @@ export default function Wishlist() {
 					</div>
 				}
 
-				<ul>
-					{wishlist.map(item => (
-						<li key={item.id}>
-							<strong>{item.name}</strong>
-							<p>{item.description}</p>
-							<p>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.value)}</p>
+				{!loading && list.length > 0 &&
+					<table>
+						<thead>
+							<tr>
+								<th data-header="Nome">Nome</th>
+								<th data-header="Descrição">Descrição</th>
+								<th data-header="Valor">Valor</th>
+								<th data-header="Editar" className="action">Editar</th>
+								<th data-header="Excluir" className="action">Excluir</th>
+							</tr>
+						</thead>
 
-							<button type="button" onClick={() => history.push(`/wishlist/${item.id}`)}>
-								<FiEdit size={20} color="#a8a8b3" />
-							</button>
-
-							<button type="button" onClick={() => handleDelete(item.id)}>
-								<FiTrash2 size={20} color="#a8a8b3" />
-							</button>
-						</li>
-					))}
-				</ul>
+						<tbody>
+							{list.map(item => (
+								<tr key={item.id}>
+									<td data-header="Nome">{item.name}</td>
+									<td data-header="Descrição">{item.description}</td>
+									<td data-header="Valor">{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.value)}</td>
+									<td data-header="Editar" className="action">
+										<button type="button" onClick={() => history.push(`/wishlist/${item.id}`)}>
+											<FiEdit size={20} color="#a8a8b3" />
+										</button>
+									</td>
+									<td data-header="Excluir" className="action">
+										<button type="button" onClick={() => handleDelete(item.id)}>
+											<FiTrash2 size={20} color="#a8a8b3" />
+										</button>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				}
 			</div>
 		</div>
 	);

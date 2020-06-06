@@ -2,7 +2,7 @@ header {
 	display: flex;
 	align-items: center;
 	padding: 32px;
-	border-bottom: 1px solid #dcdce6;    
+	border-bottom: 1px solid #dcdce6;
 }
 
 header .brand {
@@ -55,7 +55,7 @@ header .profile svg {
 	margin-left: 8px;
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 480px) {
 	header {
 		flex-direction: column;
 		align-items: normal;

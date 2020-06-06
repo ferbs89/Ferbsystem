@@ -16,7 +16,7 @@ export default function Input({ name, ...rest }) {
     return (
         <div className="field">
             <input ref={inputRef} defaultValue={defaultValue} {...rest} />
-            { error && <span>{error}</span> }
+            {error && <span>{error}</span>}
         </div>
     );
 }

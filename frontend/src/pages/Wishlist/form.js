@@ -10,6 +10,7 @@ import api from '../../services/node-api';
 import { getUserId } from '../../services/auth';
 
 import Header from '../../components/Header';
+import Menu from '../../components/Menu';
 import Input from '../../components/Form/Input';
 import ButtonLoading from '../../components/ButtonLoading';
 
@@ -115,13 +116,14 @@ export default function WishlistForm(props) {
 	return (
 		<div className="container">
 			<Header />
+			<Menu />
 			
 			<div className="content">
 				<div className="page-title">
 					<h1>Lista de desejos</h1>
 				</div>
 
-				{loadingPage &&
+				{loadingPage && id &&
 					<div className="center">
 						<FadeLoader color={"#dcdce6"} loading={loadingPage} />
 					</div>
@@ -129,14 +131,14 @@ export default function WishlistForm(props) {
 
 				<div hidden={loadingPage}>
 					<Form ref={formRef} onSubmit={handleSubmit}>
-						<label>Nome</label>
-						<Input name="name" />
+						<label htmlFor="name">Nome</label>
+						<Input name="name" id="name" />
 
-						<label>Descrição</label>
-						<Input name="description" />
+						<label htmlFor="description">Descrição</label>
+						<Input name="description" id="description" />
 
-						<label>Valor R$</label>
-						<Input type="number" step="0.01" max="9999999" name="value" />
+						<label htmlFor="value">Valor R$</label>
+						<Input type="number" step="0.01" max="99999999" name="value" id="value" />
 
 						{!loadingSubmit ? (
 							<button className="button" type="submit">Salvar</button>
@@ -146,7 +148,7 @@ export default function WishlistForm(props) {
 					</Form>
 
 					<Link className="back-link" to="/wishlist">
-						<FiArrowLeft size={16} color="#17496E" />
+						<FiArrowLeft size={20} color="#17496E" />
 						Voltar
 					</Link>
 				</div>
