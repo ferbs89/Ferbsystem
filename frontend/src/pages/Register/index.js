@@ -93,7 +93,7 @@ export default function Register() {
 
 				<div className="center">
 					<Link className="back-link" to="/">
-						<FiArrowLeft size={20} color="#17496E" />
+						<FiArrowLeft />
 						Voltar para o login
 					</Link>
 				</div>

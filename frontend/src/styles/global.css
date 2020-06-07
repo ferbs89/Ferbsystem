@@ -78,6 +78,7 @@ body {
 
 h1 {
 	font-size: 24px;
+	margin-bottom: 16px;
 }
 
 input {
@@ -138,7 +139,10 @@ button {
 }
 
 .back-link svg {
+	width: 20px;
+	height: 20px;
 	margin-right: 8px;
+	color: #17496E;
 }
 
 .back-link:hover {
@@ -155,6 +159,7 @@ button {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	margin-top: 16px;
 	margin-bottom: 32px;
 	height: 48px;
 }
@@ -165,27 +170,27 @@ button {
 	width: 40%;
 }
 
-.page-title .right input {
-	width: 100%;
+.page-title input {
+	max-width: 300px;
 	margin-right: 16px;
 }
 
-.page-title .right button {
+.page-title button {
 	width: auto;
 	padding: 16px;
 }
 
 .container .content form {
-    width: 100%;
-    max-width: 400px;
-    margin-top: 16px;
+	width: 100%;
+	max-width: 400px;
+	margin-top: 32px;
 }
 
 .container .content form label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    font-size: 16px;
+	display: block;
+	margin-bottom: 8px;
+	font-weight: 500;
+	font-size: 16px;
 }
 
 table {
@@ -210,8 +215,14 @@ table th.action, table td.action {
 }
 
 table td.action button {
-    background: #FFF;
-    border: 0;
+	background: #FFF;
+	border: 0;
+}
+
+table td.action button svg {
+	width: 20px;
+	height: 20px;
+	color: #a8a8b3;
 }
 
 .Toastify__toast {
@@ -226,21 +237,18 @@ table td.action button {
 		height: auto;
 	}
 
-	.page-title h1 {
-		margin-bottom: 16px;
-	}
-
 	.page-title .right {
 		flex-direction: column;
 		width: 100%;
 	}
 
-	.page-title .right input {
+	.page-title input {
 		max-width: 100%;
+		margin-right: 0px;
 		margin-bottom: 16px;
 	}
 
-	.page-title .right button {
+	.page-title button {
 		width: 100%;
 	}
 
@@ -250,7 +258,7 @@ table td.action button {
 		border: 1px solid #dcdce6;
 		text-align: center;
 		border-radius: 8px;
-    	margin-bottom: 16px;
+		margin-bottom: 16px;
 	}
 
 	table tr:last-child {
@@ -290,7 +298,7 @@ table td.action button {
 	}
 
 	table td.total {
-    	text-align: center;
+		text-align: center;
 	}
 }
 

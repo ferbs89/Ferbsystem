@@ -8,12 +8,12 @@ export default function Menu() {
 	return (
 		<div className="menu">
 			<Link to="/finances">
-				<FiCalendar size={20} color="#17496E" />
+				<FiCalendar />
 				Controle financeiro
 			</Link>
 
 			<Link to="/wishlist">
-				<FiBookmark size={20} color="#17496E" />
+				<FiBookmark />
 				Lista de desejos
 			</Link>
 		</div>

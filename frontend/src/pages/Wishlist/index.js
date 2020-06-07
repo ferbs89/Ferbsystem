@@ -53,21 +53,22 @@ export default function Wishlist() {
 			<Menu />
 			
 			<div className="content">
-				<div className="page-title">
-					<h1>Lista de desejos</h1>
-					{!loading &&
-						<div className="right">
-							<input type="text" name="search" placeholder="Pesquisar" onChange={handleSearch} autoComplete="off" />
-							<button className="button" onClick={() => history.push('/wishlist/new') }>Adicionar</button>
-						</div>
-					}
-				</div>
+				<h1>Lista de desejos</h1>
 
 				{loading &&
 					<div className="center">
 						<FadeLoader color={"#dcdce6"} loading={loading} />
 					</div>
 				}
+
+				{!loading &&
+					<div className="page-title">
+						<input type="text" name="search" placeholder="Pesquisar" onChange={handleSearch} autoComplete="off" />
+						<div className="right">
+							<button className="button" onClick={() => history.push('/wishlist/new') }>Adicionar</button>
+						</div>
+					</div>
+				}				
 
 				{!loading && list.length > 0 &&
 					<table>
@@ -89,12 +90,12 @@ export default function Wishlist() {
 									<td data-header="Valor">{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.value)}</td>
 									<td data-header="Editar" className="action">
 										<button type="button" onClick={() => history.push(`/wishlist/${item.id}`)}>
-											<FiEdit size={20} color="#a8a8b3" />
+											<FiEdit />
 										</button>
 									</td>
 									<td data-header="Excluir" className="action">
 										<button type="button" onClick={() => handleDelete(item.id)}>
-											<FiTrash2 size={20} color="#a8a8b3" />
+											<FiTrash2 />
 										</button>
 									</td>
 								</tr>

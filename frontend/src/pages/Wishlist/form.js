@@ -119,9 +119,7 @@ export default function WishlistForm(props) {
 			<Menu />
 			
 			<div className="content">
-				<div className="page-title">
-					<h1>Lista de desejos</h1>
-				</div>
+				<h1>Lista de desejos</h1>
 
 				{loadingPage && id &&
 					<div className="center">
@@ -148,7 +146,7 @@ export default function WishlistForm(props) {
 					</Form>
 
 					<Link className="back-link" to="/wishlist">
-						<FiArrowLeft size={20} color="#17496E" />
+						<FiArrowLeft />
 						Voltar
 					</Link>
 				</div>

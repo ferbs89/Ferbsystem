@@ -22,7 +22,10 @@
 }
 
 .menu svg {
+	width: 20px;
+	height: 20px;
 	margin-right: 8px;
+	color: #17496E;
 }
 
 @media screen and (max-width: 480px) {

@@ -23,14 +23,14 @@ export default function Header() {
 			</div>
 
 			<div className="profile">
-				<div>
+				<div className="user">
 					<span className="name">{name}</span>
 					<span className="email">{email}</span>
 				</div>
 
 				<Link to="" onClick={handleLogout}>
 					Sair
-					<FiLogOut size={20} color="#17496E" />
+					<FiLogOut />
 				</Link>
 			</div>
 		</header>

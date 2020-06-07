@@ -86,7 +86,7 @@ export default function Login() {
 
 				<div className="center">
 					<Link className="back-link" to="/register">
-						<FiLogIn size={20} color="#17496E" />
+						<FiLogIn />
 						Não tenho cadastro
 					</Link>
 				</div>
