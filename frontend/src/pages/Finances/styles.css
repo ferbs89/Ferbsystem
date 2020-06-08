@@ -1,20 +1,20 @@
 .value {
-    display: inline-flex;
-    align-items: center;
-    font-weight: 500;
+	display: inline-flex;
+	align-items: center;
+	font-weight: 500;
 }
 
 .value svg {
-    width: 16px;
-    height: 16px;
-    margin-right: 8px;
-    margin-bottom: 1px;
+	width: 16px;
+	height: 16px;
+	margin-right: 8px;
+	margin-bottom: 1px;
 }
 
 .positive {
-    color: #080;
+	color: #080;
 }
 
 .negative {
-    color: #F00;
+	color: #F00;
 }

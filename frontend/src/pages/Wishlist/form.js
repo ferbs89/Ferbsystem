@@ -135,7 +135,7 @@ export default function WishlistForm(props) {
 						<label htmlFor="description">Descrição</label>
 						<Input name="description" id="description" />
 
-						<label htmlFor="value">Valor R$</label>
+						<label htmlFor="value">Valor</label>
 						<Input type="number" step="0.01" max="99999999" name="value" id="value" />
 
 						{!loadingSubmit ? (
