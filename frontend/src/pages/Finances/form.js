@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { FiArrowLeft } from 'react-icons/fi';
+import { FiPlusCircle, FiMinusCircle, FiArrowLeft } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import FadeLoader from 'react-spinners/FadeLoader';
 import { Form } from '@unform/web';
@@ -9,6 +9,7 @@ import * as Yup from 'yup';
 import api from '../../services/node-api';
 import { getUserId } from '../../services/auth';
 
+import './styles.css';
 import Header from '../../components/Header';
 import Menu from '../../components/Menu';
 import Input from '../../components/Form/Input';
@@ -17,6 +18,7 @@ import ButtonLoading from '../../components/ButtonLoading';
 export default function WishlistForm(props) {
 	const [loadingPage, setLoadingPage] = useState(true);
 	const [loadingSubmit, setLoadingSubmit] = useState(false);
+	const [type, setType] = useState('');
 
 	const { id } = props.match.params;
 
@@ -30,67 +32,78 @@ export default function WishlistForm(props) {
 			return;
 		}
 
-		api.get(`users/${userId}/wishlist/${id}`).then(response => {
-			const { name, description, value } = response.data
-			
+		api.get(`users/${userId}/finances/${id}`).then(response => {
+			const { type, value, description } = response.data
+
+			const dateParts = response.data.date.split('/');
+			const date = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0]; 
+
 			formRef.current.setData({
-				name, 
-				description, 
-				value,
+				value, 
+				date, 
+				description,
 			});
 
+			setType(type);
 			setLoadingPage(false);
 
 		}).catch(() => {
-			history.push('/wishlist');
+			history.push('/finances');
 		});
 	}, [userId, id, history]);
-
+	
 	async function handleSubmit(data, { reset }) {
+		if (type === '') {
+			toast.error('Selecione a opção receita ou despesa.');
+			return;
+		}
+
 		setLoadingSubmit(true);
 		formRef.current.setErrors({});
 
 		try {
 			const schema = Yup.object().shape({
-				name: Yup.string()
-					.required('Nome obrigatório.'),
+				value: Yup.number()
+					.typeError('Valor obrigatório.'),
+
+				date: Yup.date()
+					.typeError('Data obrigatória.'),
 
 				description: Yup.string()
-					.required('Descrição obrigatória.'),
-
-				value: Yup.number()
-					.typeError('Valor obrigatório.')
+					.required('Descrição obrigatória.')				
 			});
 
 			await schema.validate(data, {
 				abortEarly: false,
 			});
 
-			const { name, description, value } = data;
-			
+			const { value, date, description } = data;
+
 			if (!id) {
-				api.post(`users/${userId}/wishlist`, {
-					name,
-					description,
+				api.post(`users/${userId}/finances`, {
+					type,
 					value,
+					date,
+					description,
 				
 				}).then(response => {
 					toast.success('Registro salvo com sucesso.');
-					history.push('/wishlist');
+					history.push('/finances');
 
 				}).catch(() => {
 					setLoadingSubmit(false);
 				});
-			
+
 			} else {
-				api.put(`users/${userId}/wishlist/${id}`, {
-					name,
-					description,
+				api.put(`users/${userId}/finances/${id}`, {
+					type,
 					value,
+					date,
+					description,
 				
 				}).then(response => {
 					toast.success('Registro salvo com sucesso.');
-					history.push('/wishlist');
+					history.push('/finances');
 
 				}).catch(() => {
 					setLoadingSubmit(false);
@@ -118,7 +131,7 @@ export default function WishlistForm(props) {
 			<Menu />
 			
 			<div className="content">
-				<h1>Lista de desejos</h1>
+				<h1>Controle financeiro</h1>
 
 				{loadingPage && id &&
 					<div className="center">
@@ -128,14 +141,26 @@ export default function WishlistForm(props) {
 
 				<div hidden={loadingPage}>
 					<Form ref={formRef} onSubmit={handleSubmit}>
-						<label htmlFor="name">Nome</label>
-						<Input name="name" id="name" />
+						<div className="type-container">
+							<div className={type === 'P' ? 'type type-positive' : 'type type-off'} onClick={() => setType('P')}>
+								<FiPlusCircle />
+								Receita
+							</div>
 
-						<label htmlFor="description">Descrição</label>
-						<Input name="description" id="description" />
+							<div className={type === 'N' ? 'type type-negative' : 'type type-off'} onClick={() => setType('N')}>
+								<FiMinusCircle />
+								Despesa
+							</div>
+						</div>
 
 						<label htmlFor="value">Valor</label>
 						<Input type="number" step="0.01" max="99999999" name="value" id="value" />
+
+						<label htmlFor="date">Data</label>
+						<Input type="date" name="date" id="date" />
+
+						<label htmlFor="description">Descrição</label>
+						<Input name="description" id="description" />
 
 						{!loadingSubmit ? (
 							<button className="button" type="submit">Salvar</button>
@@ -144,7 +169,7 @@ export default function WishlistForm(props) {
 						)}
 					</Form>
 
-					<Link className="back-link" to="/wishlist">
+					<Link className="back-link" to="/finances">
 						<FiArrowLeft />
 						Voltar
 					</Link>

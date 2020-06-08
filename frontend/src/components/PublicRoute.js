@@ -11,7 +11,7 @@ export default function PublicRoute({ component: Component, ...rest }) {
                 !getSession() ? (
                     <Component {...props} />
                 ) : (
-                    <Redirect to={{ pathname: "/wishlist", state: { from: props.location } }} />
+                    <Redirect to={{ pathname: "/finances", state: { from: props.location } }} />
                 )
             )}
         />

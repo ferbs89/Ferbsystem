@@ -43,7 +43,7 @@ export default function Wishlist() {
 
 	function handleSearch(e) {
 		const search = e.target.value.toLowerCase();
-		
+
 		setList(wishlist.filter(wishlist => wishlist.name.toLowerCase().includes(search)));
 	}
 
@@ -68,7 +68,7 @@ export default function Wishlist() {
 							<button className="button" onClick={() => history.push('/wishlist/new') }>Adicionar</button>
 						</div>
 					</div>
-				}				
+				}
 
 				{!loading && list.length > 0 &&
 					<table>

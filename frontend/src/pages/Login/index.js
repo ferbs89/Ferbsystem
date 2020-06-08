@@ -45,7 +45,7 @@ export default function Login() {
 				const { token } = response.data;
 
 				login(token);			
-				history.push('/wishlist');
+				history.push('/finances');
 				
 			}).catch(() => {
 				setLoading(false);

@@ -226,8 +226,8 @@ table td.action button svg {
 }
 
 table tfoot td {
-	padding-top: 10px;
-	padding-bottom: 10px;
+	border: 0px;
+	font-weight: bold;
 }
 
 .Toastify__toast {

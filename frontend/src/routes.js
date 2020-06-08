@@ -8,23 +8,26 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 
 import Finances from './pages/Finances';
+import FinancesForm from './pages/Finances/form';
 
 import Wishlist from './pages/Wishlist';
 import WishlistForm from './pages/Wishlist/form';
 
 export default function Routes() {
-    return (
-        <BrowserRouter>
-            <Switch>
-                <PublicRoute path="/" exact component={Login} />
-                <PublicRoute path="/register" component={Register} />
+	return (
+		<BrowserRouter>
+			<Switch>
+				<PublicRoute path="/" exact component={Login} />
+				<PublicRoute path="/register" component={Register} />
 
-                <PrivateRoute path="/finances" exact component={Finances} />
+				<PrivateRoute path="/finances" exact component={Finances} />
+				<PrivateRoute path="/finances/new" component={FinancesForm} />
+				<PrivateRoute path="/finances/:id" component={FinancesForm} />
 
-                <PrivateRoute path="/wishlist" exact component={Wishlist} />
-                <PrivateRoute path="/wishlist/new" component={WishlistForm} />
-                <PrivateRoute path="/wishlist/:id" component={WishlistForm} />
-            </Switch>
-        </BrowserRouter>
-    );
+				<PrivateRoute path="/wishlist" exact component={Wishlist} />
+				<PrivateRoute path="/wishlist/new" component={WishlistForm} />
+				<PrivateRoute path="/wishlist/:id" component={WishlistForm} />
+			</Switch>
+		</BrowserRouter>
+	);
 }

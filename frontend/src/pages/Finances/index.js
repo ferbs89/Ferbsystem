@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { FiPlusCircle, FiMinusCircle, FiEdit, FiTrash2 } from 'react-icons/fi';
+import { toast } from 'react-toastify';
 import FadeLoader from 'react-spinners/FadeLoader';
 
 import api from '../../services/node-api';
@@ -16,6 +18,7 @@ export default function Finances() {
 	const [loading, setLoading] = useState(true);
 
 	const userId = getUserId();
+	const history = useHistory();
 
 	useEffect(() => {
 		api.get(`users/${userId}/finances`).then(response => {
@@ -31,9 +34,23 @@ export default function Finances() {
 		});
 	}, [userId]);
 
+	async function handleDelete(id) {
+		await api.delete(`finances/${id}`).then(response => {
+			const updatedList = finances.filter(finance => finance.id !== id);
+			const totalValue = calculateTotal(updatedList);
+
+			setFinances(updatedList);
+			setList(updatedList);
+			setTotal(totalValue);
+
+			toast.success('Registro excluído com sucesso.');
+
+		}).catch(() => {});
+	}
+
 	function handleSearch(e) {
 		const search = e.target.value.toLowerCase();
-		const newList = finances.filter(finances => finances.description.toLowerCase().includes(search));
+		const newList = finances.filter(finance => finance.description.toLowerCase().includes(search));
 		const totalValue = calculateTotal(newList);
 
 		setList(newList);
@@ -71,7 +88,7 @@ export default function Finances() {
 					<div className="page-title">
 						<input type="text" name="search" placeholder="Pesquisar" onChange={handleSearch} autoComplete="off" />
 						<div className="right">
-							<button className="button">Adicionar</button>
+							<button className="button" onClick={() => history.push('/finances/new') }>Adicionar</button>
 						</div>
 					</div>
 				}
@@ -80,11 +97,11 @@ export default function Finances() {
 					<table>
 						<thead>
 							<tr>
-								<th data-header="Data">Data</th>
-								<th data-header="Descrição">Descrição</th>
-								<th data-header="Valor">Valor</th>
-								<th data-header="Editar" className="action">Editar</th>
-								<th data-header="Excluir" className="action">Excluir</th>
+								<th>Data</th>
+								<th>Descrição</th>
+								<th>Valor</th>
+								<th className="action">Editar</th>
+								<th className="action">Excluir</th>
 							</tr>
 						</thead>
 
@@ -94,25 +111,18 @@ export default function Finances() {
 									<td data-header="Data">{item.date}</td>
 									<td data-header="Descrição">{item.description}</td>
 									<td data-header="Valor">
-										{item.type === 'P' ? 
-											<span className="value positive">
-												<FiPlusCircle />
-												{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.value)}
-											</span>
-										: 
-											<span className="value negative">
-												<FiMinusCircle />
-												{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.value)}
-											</span>
-										}
+										<span className={item.type === 'P' ? 'value positive' : 'value negative'}>
+											{item.type === 'P' ? <FiPlusCircle /> : <FiMinusCircle />}
+											{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.value)}
+										</span>
 									</td>
 									<td data-header="Editar" className="action">
-										<button type="button">
+										<button type="button" onClick={() => history.push(`/finances/${item.id}`)}>
 											<FiEdit />
 										</button>
 									</td>
 									<td data-header="Excluir" className="action">
-										<button type="button">
+										<button type="button" onClick={() => handleDelete(item.id)}>
 											<FiTrash2 />
 										</button>
 									</td>
@@ -122,14 +132,12 @@ export default function Finances() {
 
 						<tfoot>
 							<tr>
-								<td colSpan="2"><strong>Total</strong></td>
+								<td colSpan="2">Total</td>
 								<td colSpan="3">
-									{total > 0 ?
-										<span className="value positive"><FiPlusCircle />{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(total)}</span>
-									:
-										<span className="value negative"><FiMinusCircle />{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Math.abs(total))}</span>
-									}
-									
+									<span className={total > 0 ? 'value positive' : 'value negative'}>
+										{total > 0 ? <FiPlusCircle /> : <FiMinusCircle />}
+										{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Math.abs(total))}
+									</span>
 								</td>
 							</tr>
 						</tfoot>

@@ -1,7 +1,6 @@
 .value {
 	display: inline-flex;
 	align-items: center;
-	font-weight: 500;
 }
 
 .value svg {
@@ -17,4 +16,51 @@
 
 .negative {
 	color: #F00;
+}
+
+.type-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.type {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 64px;
+	margin-bottom: 32px;
+
+	font-size: 16px;
+	font-weight: 500;
+
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.type + .type {
+	margin-left: 16px;
+}
+
+.type svg {
+	width: 20px;
+	height: 20px;
+	margin-right: 8px;
+}
+
+.type-off {
+	color: #a8a8b3;
+	border: 1px solid #dcdce6;
+}
+
+.type-positive {
+	background: #cfc;
+	color: #080;
+	border: 1px solid #080;
+}
+
+.type-negative {
+	background: #fcc;
+	color: #F00;
+	border: 1px solid #F00;
 }
